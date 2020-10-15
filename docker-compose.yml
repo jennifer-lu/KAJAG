@@ -1,5 +1,10 @@
 version: "3"
+volumes:
+  uploads:
+
 services:
+  redis:
+    image: redis:6.0-alpine
   flask:
     build:
       context: ./webserver/
@@ -9,8 +14,14 @@ services:
       - 5000:5000
     depends_on:
       - celery
+    volumes:
+      - uploads:/var/www/uploads
   celery:
     build: ./webserver/celery
     env_file: ./webserver/celery/celery.env
     ports:
       - 5555:5555
+    depends_on:
+      - redis
+    volumes:
+      - uploads:/uploads
