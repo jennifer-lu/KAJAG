@@ -23,6 +23,7 @@ file_path = "files/" + filename
 shutil.move(filename, file_path)
 
 # Compose email
+receiver = "se101kajag@gmail.com"
 subject = "KAJAG: Your File is Ready!"
 message = """\
 Hello,
@@ -31,11 +32,9 @@ Your scan has been sucessfully converted into a LaTeX document.
 Please find attatched a pdf file containing your scan.
 
 Thank you for using KAJAG."""
-sender = "se101kajag@gmail.com"
-receiver = "se101kajag@gmail.com"
 email = MIMEMultipart()
-email["From"] = sender
 email["To"] = receiver
+email["From"] = "se101kajag@gmail.com"
 email["Subject"] = subject
 email.attach(MIMEText(message, "plain"))
 
@@ -50,5 +49,5 @@ email.attach(pdf)
 # Send email
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-    server.login(sender, "j33Lh8fTdhtcRJL")
-    server.sendmail(sender, receiver, email.as_string())
+    server.login("se101kajag@gmail.com", "j33Lh8fTdhtcRJL")
+    server.sendmail("se101kajag@gmail.com", receiver, email.as_string())
