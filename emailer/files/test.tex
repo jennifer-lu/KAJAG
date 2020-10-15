@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\textwidth 15cm 
+\textheight 21.3cm
+\evensidemargin 6mm
+\oddsidemargin 6mm
+\topmargin -1.1cm
+\setlength{\parskip}{1.5ex}
+
+
+\usepackage{amsfonts,amsmath,amssymb,enumerate}
+
+\begin{document}
+\parindent=0pt
+
+\textbf{MATH 135 Fall 2020: Assignment 1\\Due at 11:55 PM EDT on Friday, September 18th, 2020\\Covers the contents of Lessons from 1.1 to 1.5}
+
+\textbf{Q01.}
+
+Determine if the following statements are \emph{true} or \emph{false}. No justification is required.
+
+\begin{enumerate}[(a)]
+\item $\forall x \in \mathbb Z, \exists y \in \mathbb Z, x^2 \leq y^4$
+
+\item $\exists y \in \mathbb Z, \forall x \in \mathbb Z, x^2 \leq y^4$
+
+\item $\forall y \in \mathbb Z, \exists x \in \mathbb Z, x^2 \leq y^4$
+
+\item $\exists x \in \mathbb Z, \forall y \in \mathbb Z, x^2 \leq y^4$
+
+\item $\exists x \in \mathbb Z, \exists y \in \mathbb Z, x^2 \leq y^4$
+
+\item $\forall x \in \mathbb Z, \forall y \in \mathbb Z, x^2 \leq y^4$
+\end{enumerate}
+
+
+
+
+
+\textbf{Q02.}
+
+($5$ marks) An integer $p > 1$ is called \emph{prime} if its only positive divisors are $1$ and $p$. For example, $2$, $3$ and $5$ are prime, but $4$ is not prime because, apart from being divisible by $1$ and $4$, it is also divisible by $2$.
+
+Consider the following statement:
+%
+\begin{center}
+\emph{For any prime $p$ the equation $x^2 - py^2 = 1$ has a solution in positive integers $x$ and $y$.}
+\end{center}
+
+\begin{enumerate}[(a)]
+\item ($2$ marks) Let $\mathbb P = \{2, 3, 5, \ldots\}$ denote the set of all prime numbers. Express the above statement symbolically, without using words.
+
+\item ($2$ marks) State the negation of the above mathematical statement without using words or the $\neg$ symbol.
+
+\item ($1$ mark) The above mathematical statement was proved in XVIII century by the French mathematician Joseph Louis Lagrange. Since this statement has been proved, is it \emph{true} or \emph{false}?
+\end{enumerate}
+
+
+
+
+\textbf{Q03.}
+
+($3$ marks) Consider the following universally quantified statement:
+%
+\begin{center}
+\emph{For every integer $x$ such that $x > 1$, it is the case that $2x^2 + 7x + 4 > 25$.}
+\end{center}
+
+
+\begin{enumerate}[(a)]
+\item Below you will find three proofs of this statement. One of them is erroneous, another one is correct and well-written, and the remaining one, though correct, needs to be re-written. Which one is which?
+%
+\begin{itemize}
+\item \textbf{Proof A.} $\forall x \in \mathbb Z$ with $x > 1$ we have that the smallest value of $x$ \mbox{is $2$}. When $x = 2$ $P(2)$ is true, thus the statement is true.
+
+\item \textbf{Proof B.} Let $x$ be an integer such that $x > 1$. Then $x \geq 2$, so $2x^2 \geq 8$ and $7x \geq 14$. Therefore,
+%
+$$
+2x^2 + 7x + 4 \geq 8 + 14 + 4 = 26 > 25.
+$$
+
+\item \textbf{Proof C.} $2x^2 + 7x + 4 > 25$ is the same as $2x^2 + 7x - 21 > 0$. Since $x \geq 2$,
+%
+$$
+2x^2 + 7x - 21 \geq 1 > 0.
+$$
+\end{itemize}
+
+\item Write a reflection about the proofs given in Part (a). Make sure to include the following details:
+%
+\begin{itemize}
+\item ($1$ mark) For the erroneous proof, what do you think the problems are? Think not only about the validity of the arguments, but also about the presentation.
+
+\item ($1$ mark) For the proof that is correct, but which requires reformulation, why do you think it \emph{is} correct? What sort of reformulations would you introduce? What kind of details would you add?
+
+\item ($1$ mark) For the proof that is correct and well-written, what do you think makes it a good proof? Is it a particular structure? A particular flow of the argument? Was it easy for you to follow the proof?
+\end{itemize}
+\end{enumerate}
+
+
+
+
+
+\textbf{Q04.}
+
+($4$ marks) Choose the appropriate domain, $S$, and the appropriate open sentence, $P(a, b)$, to make each statement true. You can use each domain and each open sentence exactly once. \textbf{Note that there is only one solution!}
+ %
+ 	\begin{center}\begin{tabular}{|c|c|}
+ 	\hline \text{Domain,} $S$ & \text{Open sentence,} $P(a, b)$\\ \hline 
+ 	 $\left\{-\frac{1}{3},\, -\frac{1}{2},\, \frac{1}{2},\, \frac{1}{3}\right\}$ &  $a \leq b$ \\ \hline
+	 $\mathbb N$ &  $\frac{a}{b^2 + 1} \in S$ \\ \hline
+	$\mathbb Q$ & $a = 7b^3 + 10$\\ \hline
+	$\mathbb R$ & $\sin\left(\frac{\pi a}{2}\right) + \cos\left(\frac{\pi b}{2}\right) = \frac{\sqrt 2 + \sqrt 3}{2}$ \\ \hline 	 
+ 	\end{tabular}\end{center}\vspace{0.2cm}
+ 	
+ 		\begin{enumerate}[(a)]
+			\item ($1$ mark) $\forall a \in S, \forall b \in S, P(a, b)$, where $S=$ \rule{2cm}{0.1mm} and\\$P(a, b)=$  \rule{5cm}{0.1mm}.\vspace{3mm}
+
+
+			\item ($1$ mark) $\forall a \in S, \exists b \in S, P(a, b)$, where $S=$ \rule{2cm}{0.1mm} and\\$P(a, b)=$  \rule{5cm}{0.1mm}.\vspace{3mm}
+		
+			\item ($1$ mark) $\exists a \in S, \forall b \in S, P(a, b)$, where $S=$ \rule{2cm}{0.1mm} and\\$P(a, b)=$  \rule{5cm}{0.1mm}.\vspace{3mm}
+
+	
+			\item ($1$ mark) $\exists a \in S, \exists b \in S, P(a, b)$, where $S=$ \rule{2cm}{0.1mm} and\\$P(a, b)=$  \rule{5cm}{0.1mm}.\vspace{3mm}
+ 		\end{enumerate}
+
+
+
+
+
+\textbf{Q05.}
+
+($5$ marks) Let $P(x, n)$ denote the open sentence ``$\exists y \in \mathbb Z, x^2 - xy + y^2 = n$''.
+
+\begin{enumerate}[(a)]
+\item ($2$ marks) Determine the truth values of mathematical statements $P(3, 19)$ and $P(-1, 11)$.
+
+\item ($2$ marks) Is the sentence $\exists x \in \mathbb Z, P(x, n)$ a mathematical statement or an open sentence? If it is a mathematical statement, determine its truth value, justifying your answer. If it is an open sentence, explain what variable(s) it depends on.
+
+\item ($1$ mark) Is the sentence $\forall n \in \mathbb N, \exists x \in \mathbb Z, P(x, n)$ a mathematical statement or an open sentence? If it is a mathematical statement, determine its truth value, justifying your answer. If it is an open sentence, explain what variable(s) it depends on.
+
+\textbf{Hint:} Note that $x^2 - xy + y^2 = \left(x - \frac{y}{2}\right)^2 + \frac{3}{4}y^2$.
+
+\textbf{Hint for an alternative solution:} Try solving the quadratic equation
+%
+$$
+x^2 - yx + (y^2 - n) = 0.
+$$
+\end{enumerate}
+\end{document}

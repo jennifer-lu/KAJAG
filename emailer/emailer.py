@@ -1,52 +1,54 @@
-import email, smtplib, ssl, os, subprocess
+# File: emailer.py
+# Authors: KAJAG
+# Last edited: October 14, 2020
+# Description: Converts a tex file into pdf and emails it.
 
+import subprocess, os, shutil, email, smtplib, ssl
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-p = subprocess.Popen(["pdflatex", "test.tex"])
+# Convert tex file to pdf
+filename = "test"
+file_path = "files/" + filename
+process = subprocess.Popen(["pdflatex", file_path + ".tex"])
+process.wait()
 
-p.wait()
+# Update files and file path
+os.remove(filename + ".log")
+os.remove(filename + ".aux")
+filename = filename + ".pdf"
+file_path = "files/" + filename
+shutil.move(filename, file_path)
 
-subject = "Scanner: Your File is Ready!"
-body = "Please find attatched your scanned image as a LaTeX pdf."
-sender_email = "se101kajag@gmail.com"
-receiver_email = "se101kajag@gmail.com"
+# Compose email
+subject = "KAJAG: Your File is Ready!"
+message = """\
+Hello,
 
-# Create a multipart message and set headers
-message = MIMEMultipart()
-message["From"] = sender_email
-message["To"] = receiver_email
-message["Subject"] = subject
+Your scan has been sucessfully converted into a LaTeX document.
+Please find attatched a pdf file containing your scan.
 
-# Add body to email
-message.attach(MIMEText(body, "plain"))
+Thank you for using KAJAG."""
+sender = "se101kajag@gmail.com"
+receiver = "se101kajag@gmail.com"
+email = MIMEMultipart()
+email["From"] = sender
+email["To"] = receiver
+email["Subject"] = subject
+email.attach(MIMEText(message, "plain"))
 
-filename = "test.pdf"
+# Attatch pdf
+with open(file_path, "rb") as attachment:
+    pdf = MIMEBase("application", "octet-stream")
+    pdf.set_payload(attachment.read())
+encoders.encode_base64(pdf)
+pdf.add_header('Content-Disposition', "attachment; filename=%s" %filename)
+email.attach(pdf)
 
-# Open PDF file in binary mode
-with open(filename, "rb") as attachment:
-    # Add file as application/octet-stream
-    # Email client can usually download this automatically as attachment
-    part = MIMEBase("application", "octet-stream")
-    part.set_payload(attachment.read())
-
-# Encode file in ASCII characters to send by email
-encoders.encode_base64(part)
-
-# Add header as key/value pair to attachment part
-part.add_header(
-    "Content-Disposition",
-    f"attachment; filename= {filename}",
-)
-
-# Add attachment to message and convert message to string
-message.attach(part)
-text = message.as_string()
-
-# Log in to server using secure context and send email
+# Send email
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-    server.login(sender_email, "j33Lh8fTdhtcRJL")
-    server.sendmail(sender_email, receiver_email, text)
+    server.login(sender, "j33Lh8fTdhtcRJL")
+    server.sendmail(sender, receiver, email.as_string())
