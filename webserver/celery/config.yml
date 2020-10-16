@@ -1,5 +1,17 @@
 #HARDCODED VALUES TO BE DELETED
-server: smtp.gmail.com
 sender: se101kajag@gmail.com
 password: j33Lh8fTdhtcRJL
-receiver: se101kajag@gmail.com
+receiver: kevintong0821@gmail.com
+success_subject: "KAJAG: Your File is Ready!"
+success_message: |
+  Hello,
+
+  Your scan has been sucessfully converted into a LaTeX document.
+  Please find attatched a pdf file containing your scan.
+
+  Thank you for using KAJAG.
+failure_subject: "KAJAG: File Failed to Convert"
+failure_message: |
+  Hello,
+
+  Your scan has been failed to have any recognizable written features to convert into a LaTeX document.

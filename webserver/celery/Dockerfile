@@ -1,5 +1,5 @@
 FROM python:3.7.8-slim-buster
-RUN mkdir uploads tex
+RUN mkdir uploads tex pdf
 WORKDIR /app
 
 RUN apt-get update

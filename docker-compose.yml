@@ -1,7 +1,7 @@
 version: "3"
 volumes:
   uploads:
-
+  # tex:
 services:
   redis:
     image: redis:6.0-alpine
@@ -16,6 +16,7 @@ services:
       - celery
     volumes:
       - uploads:/var/www/uploads
+      # - tex:/var/www/tex
   celery:
     build: ./webserver/celery
     env_file: ./webserver/celery/celery.env

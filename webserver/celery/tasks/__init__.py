@@ -1,7 +1,9 @@
-from celery import Celery
 import os
 import cv2
-
+from celery import Celery
+from .transpile import transpile
+from .pdf import toPDF
+from .email import send, fail
 app = Celery(
     "tasks",
     backend="redis://redis:6379",
@@ -11,4 +13,11 @@ app = Celery(
 
 @app.task(name="tasks.convert")
 def convert(image, email):
-    img = cv2.imread("/uploads/"+image)
+    path = "/uploads/" + image + ".jpg"
+    for i in range(3):
+        if (transpile(path, image)):
+            toPDF(image)
+            send(image)
+            return
+        print(f"Failed Attempts: {i+1}")
+    fail(image)
