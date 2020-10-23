@@ -1,13 +1,13 @@
-# File: emailer.py
-# Authors: KAJAG
-# Last edited: October 14, 2020
-# Description: Converts a tex file into pdf and emails it.
 
-import subprocess, os, shutil, email, smtplib, ssl
-from email import encoders
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
+import subprocess
+import os
+import ssl
+import smtplib
+import email
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 
 # Convert tex file to pdf
 filename = "test"
@@ -43,7 +43,7 @@ with open(file_path, "rb") as attachment:
     pdf = MIMEBase("application", "octet-stream")
     pdf.set_payload(attachment.read())
 encoders.encode_base64(pdf)
-pdf.add_header('Content-Disposition', "attachment; filename=%s" %filename)
+pdf.add_header('Content-Disposition', "attachment; filename=%s" % filename)
 email.attach(pdf)
 
 # Send email
