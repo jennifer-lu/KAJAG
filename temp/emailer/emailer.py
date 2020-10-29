@@ -1,4 +1,3 @@
-
 import subprocess
 import os
 import ssl
@@ -8,6 +7,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+
+# Get password
+password = input("Password: ")
 
 # Convert tex file to pdf
 filename = "test"
@@ -49,5 +51,5 @@ email.attach(pdf)
 # Send email
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-    server.login("se101kajag@gmail.com", "j33Lh8fTdhtcRJL")
+    server.login("se101kajag@gmail.com", password) #j33Lh8fTdhtcRJL
     server.sendmail("se101kajag@gmail.com", receiver, email.as_string())
