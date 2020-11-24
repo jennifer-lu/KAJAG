@@ -1,0 +1,4 @@
+==TODOs
+Really right now theres alot of stuff to be done.
+Main thing is figuring out the proper logins, then the webpages for upload, then crowdmark integration.
+Hopefully my JS is better than I think it is :)
