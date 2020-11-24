@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
 
 var mongoose = require("mongoose");
 var mongoDB = "mongodb://127.0.0.1:27017/testup_db";
@@ -98,8 +97,4 @@ router.use(cors());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
-const port = process.env.PORT || 8877;
-
-app.listen(port, () =>
-	console.log(`App is listening on port ${port}`)
-);
+module.exports = router;
