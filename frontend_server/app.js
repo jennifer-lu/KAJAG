@@ -6,6 +6,16 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var subRouter = require('./routes/sub');
+var upload_fileRouter = require("./routes/upload-file");
+var listRouter = require("./routes/list");
+var loginRouter = require("./routes/login")
+
+var mongoose = require("mongoose");
+var mongoDB = "mongodb://127.0.0.1:27017/testup_db";
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 var app = express();
 
@@ -21,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use("/sub", subRouter);
+app.use("/upload-file", upload_fileRouter);
+app.use("/list", listRouter);
+app.use("/login", loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

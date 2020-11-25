@@ -7,14 +7,15 @@ const _ = require('lodash');
 var http = require('http');
 var fs = require('fs');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/testpage', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+var FileMeta = require("../models/filemeta");
+router.get("/", function(req, res){
+	names = FileMeta.find({ author: "test1" }).then(names => {
+		res.send({
+			status: true,
+			message: "Files submitted",
+			data: names
+		});
+	});
 });
-
-router.use(cors());
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
 
 module.exports = router;
