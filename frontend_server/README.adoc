@@ -1,6 +1,7 @@
 = TODOs
 
-- Add authentication in passwords (easy, hopefully)
-- Add *_PROPER_* (hashed, salted) password management in database (ie. add schema, etc)
+- Add proper signin tokens (not just username = username lmao)
+- Add method to send files to whatever & return them in a list/link/whatever
+- Make prettier
 - Add crowdmark integration
 - Add proper redirect page for uploads
