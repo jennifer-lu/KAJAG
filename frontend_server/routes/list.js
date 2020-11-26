@@ -9,7 +9,7 @@ var fs = require('fs');
 var router = express.Router();
 var FileMeta = require("../models/filemeta");
 router.get("/", function(req, res){
-	names = FileMeta.find({ author: "test1" }).then(names => {
+	names = FileMeta.find({ author: req.cookies.session.username }).then(names => {
 		res.send({
 			status: true,
 			message: "Files submitted",

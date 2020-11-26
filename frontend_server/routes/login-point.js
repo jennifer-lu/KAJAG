@@ -1,39 +1,34 @@
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var http = require("http");
-
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const _ = require('lodash');
+var http = require('http');
+var fs = require('fs');
+var multer = require("multer");
+var upload = multer();
 var router = express.Router();
+const cookieParser = require('cookie-parser');
+
+var FileMeta = require("../models/filemeta");
+
+router.use(upload.array()); 
+router.use(express.static('public'));
+
+router.use(cookieParser());
 
 router.post("/", async (req, res) => {
 	try {
-		if (!req.files) {
+		if (!req.body.username || !req.body.password) {
 			res.send({
 				status: false,
-				message: "No file"
+				message: "you fucked up"
 			});
 		} else {
-			let sub = req.files.sub;
-
-			sub.mv("./uploads/" + sub.name);
-
-			var fileData = new FileMeta({
-				name: sub.name,
-				author: "test1"
-			});
-			fileData.save().then(item => {
-				res.send({
-					status: true,
-					message: "File uploaded, database updated",
-					data: {
-						name: sub.name,
-						mimetype: sub.mimetype,
-						size: sub.size
-					}
-				});
-			}).catch(err => {
-				console.log("database fuckuwury");
-				res.status(500).send("oops");
-			});
+			res.cookie("session", {
+				username: req.body.username
+			}, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true });
+			res.redirect("./sub");
 		}
 	} catch (err) {
 		console.log("something else bwoke");

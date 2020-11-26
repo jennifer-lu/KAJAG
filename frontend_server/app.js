@@ -10,6 +10,7 @@ var subRouter = require('./routes/sub');
 var upload_fileRouter = require("./routes/upload-file");
 var listRouter = require("./routes/list");
 var loginRouter = require("./routes/login")
+var login_pointRouter = require("./routes/login-point");
 
 var mongoose = require("mongoose");
 var mongoDB = "mongodb://127.0.0.1:27017/testup_db";
@@ -35,6 +36,7 @@ app.use("/sub", subRouter);
 app.use("/upload-file", upload_fileRouter);
 app.use("/list", listRouter);
 app.use("/login", loginRouter);
+app.use("/login-point", login_pointRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

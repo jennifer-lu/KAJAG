@@ -22,13 +22,14 @@ router.post("/", async (req, res) => {
 				message: "No file"
 			});
 		} else {
+			console.log();
 			let sub = req.files.sub;
 
 			sub.mv("./uploads/" + sub.name);
 
 			var fileData = new FileMeta({
 				name: sub.name,
-				author: "test1"
+				author: req.cookies.session.username
 			});
 			fileData.save().then(item => {
 				res.send({
