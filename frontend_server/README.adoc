@@ -1,4 +1,6 @@
-==TODOs
-Really right now theres alot of stuff to be done.
-Main thing is figuring out the proper logins, then the webpages for upload, then crowdmark integration.
-Hopefully my JS is better than I think it is :)
+= TODOs
+
+- Add authentication in passwords (easy, hopefully)
+- Add *_PROPER_* (hashed, salted) password management in database (ie. add schema, etc)
+- Add crowdmark integration
+- Add proper redirect page for uploads
