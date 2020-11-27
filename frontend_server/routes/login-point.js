@@ -8,22 +8,27 @@ var fs = require('fs');
 var multer = require("multer");
 var argon2 = require("argon2");
 var upload = multer();
+const jwt = require('jsonwebtoken')
 var router = express.Router();
 const cookieParser = require('cookie-parser');
+const dotenv = require("dotenv");
+dotenv.config();
 
 var UserData = require("../models/userdata");
 
-router.use(upload.array()); 
+router.use(upload.array());
 router.use(express.static('public'));
 
 router.use(cookieParser());
-
+function generateAccessToken(username) {
+	// expires after half and hour (1800 seconds = 30 minutes)
+	return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
 router.post("/", async (req, res) => {
 	try {
 		if (!req.body.username || !req.body.password) {
-			res.send({
-				status: false,
-				message: "you fucked up"
+			res.status(401).send({
+				message: "no password"
 			});
 		} else {
 			UserData.find({ username: req.body.username}).then(users => {
@@ -31,28 +36,31 @@ router.post("/", async (req, res) => {
 					try {
 						argon2.verify(users[0].passwordhash, req.body.password).then(matches => {
 							if (matches) {
-								res.cookie("session", {
-									username: req.body.username
-								}, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true });
+								const token = generateAccessToken({ username: req.body.username });
+								console.log(token);
+
+								res.cookie("session", token);
+
 								res.redirect("./sub");
 								// password match
-								// (i hope this is obvious but this is NOT NOT NOT NOT NOT secure)
 							} else {
-								res.redirect("./login");
+								res.status(401).send({
+									message: "wrong password"
+								});
 								// password did not match
 							}
-						}) 
+						})
 					} catch (err) {
 					// internal failure
 					}
 				} else {
 					//either account doesnt exist, or multiple accounts exist
-					res.send({
+					res.status(401).send({
 						status: false,
 						message: "this account does not exist"
 					});
 				}
-				
+
 			});
 		}
 	} catch (err) {

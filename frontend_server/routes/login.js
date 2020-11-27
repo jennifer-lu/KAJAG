@@ -2,6 +2,8 @@ const express = require("express");
 var http = require('http');
 var router = express.Router();
 
+//TODO: REFACTOR FORM SO THAT IT CAN USE MIDDLEWARE (react? angular? idk man im tired)
+
 router.get("/", function(req, res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write('<form action="/login-point" method="post" enctype="multipart/form-data">');

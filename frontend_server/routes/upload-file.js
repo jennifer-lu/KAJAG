@@ -8,8 +8,12 @@ var http = require('http');
 var fs = require('fs');
 var router = express.Router();
 
+const jwt = require('jsonwebtoken')
+const dotenv = require("dotenv");
+dotenv.config();
 var FileMeta = require("../models/filemeta");
 
+//TODO: REFACTOR FORM SO THAT IT CAN USE MIDDLEWARE
 router.use(fileUpload({
 	createParentPath: true
 }));
