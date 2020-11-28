@@ -41,7 +41,13 @@ router.post("/", async (req, res) => {
 
 								res.cookie("session", token);
 
-								res.redirect("./sub");
+								res.send({
+									status: true,
+									message: "logged in",
+									data: {
+										token: token
+									}
+								});
 								// password match
 							} else {
 								res.status(401).send({
