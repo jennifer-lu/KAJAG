@@ -1,8 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Login from "./Login.js"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-  return (
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path="/login" component={Login} exact />
+				<Redirect to="/" />
+			</Switch>
+		</BrowserRouter>
+	);
+  /*
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -18,8 +28,8 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
-  );
+    </div>*/
 }
+
 
 export default App;
