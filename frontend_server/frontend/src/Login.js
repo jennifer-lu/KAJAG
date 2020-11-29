@@ -25,8 +25,7 @@ export default function Login() {
 			username: username,
 			password: password
 		}, {headers : headers}).then(res => {
-			console.log(res);
-			console.log(res.data);
+			console.log(res.data.token);
 		}).catch(err => {
 			console.log(err);
 		});

@@ -44,9 +44,7 @@ router.post("/", async (req, res) => {
 								res.send({
 									status: true,
 									message: "logged in",
-									data: {
-										token: token
-									}
+									token: token
 								});
 								// password match
 							} else {
