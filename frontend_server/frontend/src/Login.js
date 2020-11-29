@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 //import "./Login.css";
 
 export default function Login() {
@@ -9,7 +11,6 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 
 	function validateForm() {
-		console.log(`username.length = ${username.length}, password.length = ${password.length}`);
 		return username.length > 0 && password.length > 0;
 	}
 
@@ -25,8 +26,13 @@ export default function Login() {
 			username: username,
 			password: password
 		}, {headers : headers}).then(res => {
-			console.log(res.data.token);
+			console.log(res);
+			cookies.set("session", {
+				token: res.data.token
+			});
+			alert("Signed in ")
 		}).catch(err => {
+			alert("Wrong password");
 			console.log(err);
 		});
 	}
