@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 
 var UserData = require("../models/userdata");
 
-router.use(upload.array()); 
+router.use(upload.array());
 router.use(express.static('public'));
 
 router.use(cookieParser());
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 						username: req.body.username,
 						passwordhash: hash
 					});
-					
+
 					userData.save().then(item => {
 						res.send({
 							status: true,
@@ -61,10 +61,10 @@ router.post("/", async (req, res) => {
 					});
 				}).catch(err => {
 					console.log("hash fucked up");
-				});			
+				});
 			}
 		});
-			
+
 	} catch (err) {
 		console.log("something else bwoke");
 		res.status(500).send(err);
