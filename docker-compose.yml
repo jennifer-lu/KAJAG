@@ -37,6 +37,8 @@ services:
     depends_on:
       - mongodb
       - flask
+    volumes:
+      - uploads:/app/uploads
   react:
     build: ./frontend_server/frontend
     ports:

@@ -15,7 +15,6 @@ var newaccRouter = require("./routes/newacc");
 var newacc_pointRouter = require("./routes/newacc-point");
 
 const docker = process.env.NODE_ENV;
-console.log(docker);
 var mongoose = require("mongoose");
 if (docker == "docker") {
   var mongoDB = "mongodb://mongodb/testup_db";
