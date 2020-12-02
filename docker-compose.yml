@@ -33,8 +33,13 @@ services:
   node:
     build: ./frontend_server/api
     ports:
-      - 3000:3000
       - 9001:9001
     depends_on:
       - mongodb
       - flask
+  react:
+    build: ./frontend_server/frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - node
