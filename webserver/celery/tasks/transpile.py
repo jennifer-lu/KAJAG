@@ -13,7 +13,7 @@ def transpile(filepath, filename):
         base64.b64encode(open(filepath, "rb").read()).decode()
     r = requests.post("https://api.mathpix.com/v3/text",
                       data=json.dumps({'src': image_uri}),
-                      headers={"app_id": "alice_liu_uwaterloo_ca_be1dfb", "app_key": "d27cbddb366496568ec3",
+                      headers={"app_id": "alice_liu_uwaterloo_ca_be1dfb_0ce227", "app_key": "93549f18e98ca255403a",
                                "Content-type": "application/json"})
     ansJson = json.loads(r.text)
     texResult = ""

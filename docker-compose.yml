@@ -5,6 +5,10 @@ volumes:
 services:
   redis:
     image: redis:6.0-alpine
+  mongodb:
+    image: mongo:4.2-bionic
+    ports:
+      - 27017:27017
   flask:
     build:
       context: ./webserver/
@@ -26,3 +30,11 @@ services:
       - redis
     volumes:
       - uploads:/uploads
+  node:
+    build: ./frontend_server/api
+    ports:
+      - 3000:3000
+      - 9001:9001
+    depends_on:
+      - mongodb
+      - flask
