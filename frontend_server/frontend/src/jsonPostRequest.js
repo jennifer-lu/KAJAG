@@ -11,7 +11,7 @@ export default function PostRequest() {
     // get current session from cookies
     current_session = cookie.get("session")
 
-    axios.post('http://localhost:9001', {
+    axios.post('http://localhost:9001/list', {
         session: current_session
     })
     .then((response) => {
@@ -22,9 +22,4 @@ export default function PostRequest() {
         console.log(error);
     });
 }
-
-
-
-
-
 
