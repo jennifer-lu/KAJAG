@@ -1,139 +1,149 @@
-import React from 'react'
-import axios, { post } from 'axios';
-
-class Upload extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state ={
-      file:null
-    }
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.fileUpload = this.fileUpload.bind(this)
-  }
-
-  onFormSubmit(e){
-    e.preventDefault() // Stop form submit
-    this.fileUpload(this.state.file).then((response)=>{
-      console.log(response.data);
-    })
-  }
-
-  onChange(e) {
-    this.setState({file:e.target.files[0]})
-  }
-
-  async fileUpload(file){
-    const url = 'http://localhost:9001/upload-file';
-    const formData = new FormData();
-    formData.append('file',file)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
-    return post(url, formData, config);
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <input type="file" onChange={this.onChange} />
-        <button type="submit">Upload</button>
-      </form>
-   )
-  }
-}
-
-export default Upload
-
-// import axios from 'axios';
-// import React,{Component} from 'react';
+// import React from 'react'
+// import axios, { post } from 'axios';
 //
-// class Upload extends Component {
+// class Upload extends React.Component {
 //
-//   state = {
-//
-//     // Initially, no file is selected
-//     selectedFile: null
-//   };
-//
-//   // On file select (from the pop up)
-//   onFileChange = event => {
-//
-//     // Update the state
-//     this.setState({ selectedFile: event.target.files[0] });
-//
-//   };
-//
-//   // On file upload (click the upload button)
-//   onFileUpload = () => {
-//
-//     // Create an object of formData
-//     const formData = new FormData();
-//
-//     // Update the formData object
-//     formData.append(
-//       "myFile",
-//       this.state.selectedFile,
-//       this.state.selectedFile.name
-//     );
-//
-//     // Details of the uploaded file
-//     console.log(this.state.selectedFile);
-//
-//     // Request made to the backend api
-//     // Send formData object
-//     await axios.post("http://localhost:9001/upload-file", formData);
-//   };
-//
-//   // File content to be displayed after
-//   // file upload is complete
-//   fileData = () => {
-//
-//     if (this.state.selectedFile) {
-//
-//       return (
-//         <div>
-//           <h2>File Details:</h2>
-//           <p>File Name: {this.state.selectedFile.name}</p>
-//           <p>File Type: {this.state.selectedFile.type}</p>
-//         </div>
-//       );
-//     } else {
-//       return (
-//         <div>
-//           <br />
-//         </div>
-//       );
+//   constructor(props) {
+//     super(props);
+//     this.state ={
+//       file:null
 //     }
-//   };
+//     this.onFormSubmit = this.onFormSubmit.bind(this)
+//     this.onChange = this.onChange.bind(this)
+//     this.fileUpload = this.fileUpload.bind(this)
+//   }
+//
+//   onFormSubmit(e){
+//     e.preventDefault() // Stop form submit
+//     this.fileUpload(this.state.file).then((response)=>{
+//       console.log(response.data);
+//     })
+//   }
+//
+//   onChange(e) {
+//     this.setState({file:e.target.files[0]})
+//   }
+//
+//   async fileUpload(file){
+//     const url = 'http://localhost:9001/upload-file';
+//     const formData = new FormData();
+//     formData.append('file',file)
+//     const config = {
+//         headers: {
+//             'content-type': 'multipart/form-data'
+//         }
+//     }
+//     return post(url, formData);
+//   }
 //
 //   render() {
-//
 //     return (
-//       <div>
-//           <h1>
-//             TexScan
-//           </h1>
-//           <h3>
-//             Upload your assignment here:
-//           </h3>
-//           <div>
-//               <input type="file" onChange={this.onFileChange} />
-//               <button onClick={this.onFileUpload}>
-//                 Upload
-//               </button>
-//           </div>
-//         {this.fileData()}
-//       </div>
-//     );
+//       <form onSubmit={this.onFormSubmit}>
+//         <h1>File Upload</h1>
+//         <input type="file" onChange={this.onChange} />
+//         <button type="submit">Upload</button>
+//       </form>
+//    )
 //   }
 // }
 //
-// export default Upload;
+// export default Upload
+
+import axios from 'axios';
+import React,{Component} from 'react';
+
+class Upload extends Component {
+
+  state = {
+
+    // Initially, no file is selected
+    selectedFile: null
+  };
+
+  // On file select (from the pop up)
+  onFileChange = event => {
+
+    // Update the state
+    this.setState({ selectedFile: event.target.files[0] });
+
+  };
+
+  // On file upload (click the upload button)
+  onFileUpload = (file) => {
+    var headers = {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		}
+
+    // Create an object of formData
+    const formData = new FormData();
+
+    // Update the formData object
+    formData.append("myFile", file);
+
+    // Details of the uploaded file
+    console.log(this.state.selectedFile);
+
+    // Request made to the backend api
+    // Send formData object
+    // axios.post("http://localhost:9001/upload-file", formData);
+    axios.post('http://localhost:9001/upload-file', {
+			file: formData
+		}, {headers : headers}).then(res => {
+			console.log(res);
+			alert("Uploaded")
+		}).catch(err => {
+			alert("Invalid file");
+			console.log(err);
+		});
+	}
+
+
+  // File content to be displayed after
+  // file upload is complete
+  fileData = () => {
+
+    if (this.state.selectedFile) {
+
+      return (
+        <div>
+          <h2>File Details:</h2>
+          <p>File Name: {this.state.selectedFile.name}</p>
+          <p>File Type: {this.state.selectedFile.type}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <br />
+        </div>
+      );
+    }
+  };
+
+  render() {
+
+    return (
+      <div>
+          <h1>
+            TexScan
+          </h1>
+          <h3>
+            Upload your assignment here:
+          </h3>
+          <div>
+              <input type="file" onChange={this.onFileChange} />
+              <button onClick={this.onFileUpload}>
+                Upload
+              </button>
+          </div>
+        {this.fileData()}
+      </div>
+    );
+  }
+}
+
+export default Upload;
 
 
 // import React, { createRef } from "react";
