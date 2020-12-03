@@ -7,8 +7,6 @@ services:
     image: redis:6.0-alpine
   mongodb:
     image: mongo:4.2-bionic
-    ports:
-      - 27017:27017
   flask:
     build:
       context: ./webserver/
