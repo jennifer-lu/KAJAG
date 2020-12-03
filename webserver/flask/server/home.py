@@ -23,8 +23,7 @@ def files():
     dirpath = "/var/www/uploads/" + request.form.get("user")
     if (not os.path.exists(dirpath)):
         os.makedirs(dirpath)
-    filepath = "/var/www/uploads/" + request.form.get("user") + \
-        "/" + request.form.get("filename") + "_" + time
+    filepath = dirpath + "/" + request.form.get("filename") + "_" + time
     img = request.files['image']
     if (img is None):
         return 400, "Image missing."
@@ -33,6 +32,21 @@ def files():
         print(os.listdir(dirpath))
     return time
 
+
+@transpiler.route('/rpi', methods=["POST"])
+def rpi():
+    time = str(datetime.now()).replace(" ", "_")
+    dirpath = "/var/www/uploads/" + "admin"
+    if (not os.path.exists(dirpath)):
+        os.makedirs(dirpath)
+    filepath = dirpath + "/" + "filename" + "_" + time
+    img = request.files['image']
+    if (img is None):
+        return 400, "Image missing."
+    else:
+        img.save(filepath)
+        print(os.listdir(dirpath))
+    return time
 # @transpiler.route('/', methods=["POST"])
 # def transpile():
     # time = str(datetime.now()).replace(" ", "_")

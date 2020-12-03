@@ -16,6 +16,7 @@ services:
       - 5000:5000
     depends_on:
       - celery
+      - redis
     volumes:
       - uploads:/var/www/uploads
       # - tex:/var/www/tex
