@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 RUN npm i --loglevel error
-
+RUN npm install -g serve
 COPY . .
 
 RUN chmod 111 ./start.sh
