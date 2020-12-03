@@ -4,7 +4,7 @@ import Login from "./Login.js"
 import NewAcc from "./NewAcc.js"
 import Upload from "./Upload.js"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-
+require("dotenv").config();
 function App() {
 	return (
 		<BrowserRouter>

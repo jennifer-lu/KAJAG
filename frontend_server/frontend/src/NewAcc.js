@@ -23,7 +23,7 @@ export default function NewAcc() {
 
 		event.preventDefault();
 		console.log("button_press");
-		axios.post('http://localhost:9001/newacc-point', {
+		axios.post(`${process.env.REACT_APP_BACKEND_URL}/newacc-point`, {
 			username: username,
 			password: password,
 			passwordr: password2

@@ -111,7 +111,7 @@ class Upload extends Component {
     // Request made to the backend api
     // Send formData object
     // axios.post("http://localhost:9001/upload-file", formData);
-    axios.post('http://localhost:9001/upload-file', {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-file`, {
 			file: formData
 		}, {headers : headers}).then(res => {
 			console.log(res);

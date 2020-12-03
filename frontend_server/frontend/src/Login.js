@@ -22,7 +22,7 @@ export default function Login() {
 
 		event.preventDefault();
 		console.log("button_press");
-		axios.post('http://localhost:9001/login-point', {
+		axios.post(`${process.env.REACT_APP_BACKEND_URL}/login-point`, {
 			username: username,
 			password: password
 		}, {headers : headers}).then(res => {
