@@ -27,9 +27,7 @@ export default function Login() {
 			password: password
 		}, {headers : headers}).then(res => {
 			console.log(res);
-			cookies.set("session", {
-				token: res.data.token
-			});
+			cookies.set("session", res.data.token);
 			alert("Signed in ")
 		}).catch(err => {
 			alert("Wrong password");

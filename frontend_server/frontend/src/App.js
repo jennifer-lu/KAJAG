@@ -3,6 +3,7 @@ import './App.css';
 import Login from "./Login.js"
 import NewAcc from "./NewAcc.js"
 import Upload from "./Upload.js"
+import ListSub from "./ListSub.js"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 require("dotenv").config();
 function App() {
@@ -12,6 +13,7 @@ function App() {
 				<Route path="/login" component={Login} exact />
 				<Route path="/newacc" component={NewAcc} exact />
 				<Route path="/upload" component={Upload} exact />
+				<Route path="/listsub" component={ListSub} exact />
 				<Redirect to="/" />
 			</Switch>
 		</BrowserRouter>
