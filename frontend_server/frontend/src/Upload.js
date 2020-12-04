@@ -2,6 +2,8 @@ import React, { Component, createRef } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios"
 import "./Upload.css";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class Upload extends Component {
   constructor(props) {
@@ -97,6 +99,7 @@ class Upload extends Component {
     var headers = {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
+			"token": cookies.get("session")
 		}
 
     // Create an object of formData
@@ -117,6 +120,7 @@ class Upload extends Component {
 			console.log(res);
 			alert("Uploaded")
 		}).catch(err => {
+			console.log(err.response.status);
 			alert("Invalid file");
 			console.log(err);
 		});

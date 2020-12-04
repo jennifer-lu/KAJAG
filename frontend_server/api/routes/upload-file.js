@@ -12,13 +12,13 @@ const jwt = require('jsonwebtoken')
 const dotenv = require("dotenv");
 dotenv.config();
 var FileMeta = require("../models/filemeta");
+var authToken = require("./authToken.js");
 
-//TODO: REFACTOR FORM SO THAT IT CAN USE MIDDLEWARE
 router.use(fileUpload({
 	createParentPath: true
 }));
 
-router.post("/", async (req, res) => {
+router.post("/", authToken, async (req, res) => {
 	try {
 		if (!req.files) {
 			res.send({
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 
 			var fileData = new FileMeta({
 				name: sub.name,
-				author: req.cookies.session.username
+				author: req.username
 			});
 			fileData.save().then(item => {
 				res.send({
