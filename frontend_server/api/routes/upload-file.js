@@ -7,7 +7,7 @@ const _ = require('lodash');
 var http = require('http');
 var fs = require('fs');
 var router = express.Router();
-
+var axios = require("axios");
 const jwt = require('jsonwebtoken')
 const dotenv = require("dotenv");
 dotenv.config();
@@ -29,8 +29,21 @@ router.post("/", authToken, async (req, res) => {
 			console.log();
 			let sub = req.files.sub;
 
-			sub.mv("./uploads/" + sub.name);
-
+			sub.mv(`${process.env.UPLOAD_ENDPOINT}/${sub.name}`);
+			
+			var reqData = {
+				name: sub.name,
+				email: username
+			};
+			
+			axios.post(`${process.env.FLASK_ENDPOINT}/`, reqData).then(res => {
+				console.log("file submitted");
+			}).catch(err => {
+				res.send(err);
+				return;
+				//early return because the file (probably) doesnt exist
+			});
+			
 			var fileData = new FileMeta({
 				name: sub.name,
 				author: req.username
@@ -47,12 +60,12 @@ router.post("/", authToken, async (req, res) => {
 					}
 				});
 			}).catch(err => {
-				console.log("database fuckuwury");
+				console.log("database error");
 				res.status(500).send("oops");
 			});
 		}
 	} catch (err) {
-		console.log("something else bwoke");
+		console.log("other error");
 		res.status(500).send(err);
 	}
 });
