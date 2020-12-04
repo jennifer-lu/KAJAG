@@ -42,7 +42,8 @@ router.post("/", authToken, async (req, res) => {
 					data: {
 						name: sub.name,
 						mimetype: sub.mimetype,
-						size: sub.size
+						size: sub.size,
+						username: req.username
 					}
 				});
 			}).catch(err => {

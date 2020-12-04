@@ -120,8 +120,11 @@ class Upload extends Component {
 			console.log(res);
 			alert("Uploaded")
 		}).catch(err => {
-			console.log(err.response.status);
-			alert("Invalid file");
+			if (err.response.status === 401 || err.response.status === 403) {
+				alert("Invalid session/authentication error");
+			} else {
+				alert("Invalid file");
+			}
 			console.log(err);
 		});
 	}
