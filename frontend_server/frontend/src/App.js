@@ -18,6 +18,7 @@ function App() {
 		        <a href="/login" class="w3-bar-item w3-button">LOGIN</a>
 						<a href="/newacc" class="w3-bar-item w3-button">SIGN UP</a>
 		        <a href="/upload" class="w3-bar-item w3-button">UPLOAD</a>
+		        <a href="/uploadtwo" class="w3-bar-item w3-button">UPLOADTWO</a>
 		        <a href="/listsub" class="w3-bar-item w3-button">LIST SUB</a>
 		      </div>
 		    </div>
@@ -25,6 +26,7 @@ function App() {
 						<Route path="/login" component={Login} exact />
 						<Route path="/newacc" component={NewAcc} exact />
 						<Route path="/upload" component={Upload} exact />
+						<Route path="/uploadtwo" component={UploadTwo} exact />
 						<Route path="/listsub" component={ListSub} exact />
 						<Redirect to="/" />
           </Switch>

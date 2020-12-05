@@ -34,8 +34,9 @@ router.post("/", authToken, async (req, res) => {
 			console.log("moved");
 			var reqData = {
 				name: sub.name,
-				email: username
+				email: req.username
 			};
+			console.log("test2");
 			
 			/*axios.post(`${process.env.FLASK_ENDPOINT}/`, reqData).then(res => {
 				console.log("file submitted");
