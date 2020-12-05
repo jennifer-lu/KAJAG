@@ -1,7 +1,8 @@
 version: "3"
 volumes:
   uploads:
-  # tex:
+  tex:
+  pdf:
 services:
   redis:
     image: redis:6.0-alpine
@@ -19,7 +20,6 @@ services:
       - redis
     volumes:
       - uploads:/var/www/uploads
-      # - tex:/var/www/tex
   celery:
     build: ./webserver/celery
     env_file: ./webserver/celery/celery.env
@@ -29,6 +29,8 @@ services:
       - redis
     volumes:
       - uploads:/uploads
+      - tex:/tex
+      - pdf:/pdf
   node:
     build: ./frontend_server/api
     ports:
@@ -38,6 +40,8 @@ services:
       - flask
     volumes:
       - uploads:/app/uploads
+      - tex:/app/tex
+      - pdf:/app/pdf
   react:
     build: ./frontend_server/frontend
     ports:

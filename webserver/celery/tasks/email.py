@@ -11,16 +11,22 @@ smtp_server = "smtp.gmail.com"
 context = ssl.create_default_context()
 
 
-def send(filename):
+def send(filename, addr):
     with open("/app/config.yml", 'r') as stream:
         try:
             info = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             print(exc)
             return
+    with open("/app/key.yml", 'r') as stream:
+        try:
+            key = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+            return
 
     email = MIMEMultipart()
-    email["To"] = info["receiver"]
+    email["To"] = addr
     email["Subject"] = info["success_subject"]
     email.attach(MIMEText(info["success_message"], "plain"))
 
@@ -56,12 +62,12 @@ def send(filename):
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         # REPLACE WITH ENVIRONMENT VARIABLES
-        server.login(info["sender"], info["password"])
-        server.sendmail(info["sender"], info["receiver"], email.as_string())
+        server.login(info["sender"], key["password"])
+        server.sendmail(info["sender"], addr, email.as_string())
         server.quit()
 
 
-def fail(filename):
+def fail(filename, addr):
     with open("/app/config.yml", 'r') as stream:
         try:
             info = yaml.safe_load(stream)
@@ -69,8 +75,15 @@ def fail(filename):
             print(exc)
             return
 
+    with open("/app/key.yml", 'r') as stream:
+        try:
+            key = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+            return
+
     email = MIMEMultipart()
-    email["To"] = info["receiver"]
+    email["To"] = addr
     email["Subject"] = info["failure_subject"]
     email.attach(MIMEText(info["failure_message"], "plain"))
 
@@ -86,6 +99,6 @@ def fail(filename):
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         # REPLACE WITH ENVIRONMENT VARIABLES
-        server.login(info["sender"], info["password"])
-        server.sendmail(info["sender"], info["receiver"], email.as_string())
+        server.login(info["sender"], key["password"])
+        server.sendmail(info["sender"], addr, email.as_string())
         server.quit()

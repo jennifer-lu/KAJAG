@@ -12,12 +12,12 @@ app = Celery(
 
 
 @app.task(name="tasks.convert")
-def convert(image, email):
-    path = "/uploads/" + image + ".jpg"
+def convert(name, email):
+    path = "/uploads/" + name + ".jpg"
     for i in range(3):
-        if (transpile(path, image)):
-            toPDF(image)
-            send(image)
+        if (transpile(path, name)):
+            toPDF(name)
+            send(name, email)
             return
         print(f"Failed Attempts: {i+1}")
-    fail(image)
+    fail(name, email)

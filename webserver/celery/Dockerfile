@@ -13,6 +13,7 @@ COPY ./start.sh .
 RUN chmod 111 ./start.sh
 COPY tasks ./tasks
 COPY ./config.yml .
+COPY ./key.yml .
 RUN ls -al
 RUN pdflatex --version
 CMD ["bash", "start.sh"]
