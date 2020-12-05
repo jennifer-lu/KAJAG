@@ -22,11 +22,16 @@ def files():
     img = cv2.imread(filepath)
     if (img is None or img.size == 0):
         return "Bad File", 400
-
+    page = request.form.get("page")
+    if (page is None):
+        return "Missing Page Number", 400
+    assign = request.form.get("assignment")
+    if (assign is None):
+        return "Missing Assignment Title", 400
     os.remove(filepath)
     cv2.imwrite(filepath+".jpg", img)
 
-    convert.delay(name, email)
+    convert.delay(name, email, page, assign)
     return "OK"
 
 
