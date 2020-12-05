@@ -4,13 +4,26 @@ import Login from "./Login.js"
 import NewAcc from "./NewAcc.js"
 import Upload from "./Upload.js"
 import ListSub from "./ListSub.js"
+<<<<<<< HEAD
 import UploadTwo from "./UploadTwo.js"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+=======
 import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
+>>>>>>> c0a3db9f0b5c501d4d7230d9c40f72c9b570ef08
 require("dotenv").config();
 function App() {
 	return (
 		<BrowserRouter>
-
+<<<<<<< HEAD
+			<Switch>
+				<Route path="/login" component={Login} exact />
+				<Route path="/newacc" component={NewAcc} exact />
+				<Route path="/upload" component={Upload} exact />
+				<Route path="/upload" component={Upload} exact />
+				<Route path="/uploadtwo" component={UploadTwo} exact />
+				<Redirect to="/" />
+			</Switch>
+=======
 			<div class="w3-top">
 		    <div class="w3-bar w3-white w3-card" id="myNavbar">
 		      <a href="/" class="w3-bar-item w3-button w3-wide"><b>TexScan</b></a>
@@ -29,6 +42,7 @@ function App() {
 						<Redirect to="/" />
           </Switch>
         </div>
+>>>>>>> c0a3db9f0b5c501d4d7230d9c40f72c9b570ef08
 		</BrowserRouter>
 	);
   /*

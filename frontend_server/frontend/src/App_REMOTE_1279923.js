@@ -4,13 +4,11 @@ import Login from "./Login.js"
 import NewAcc from "./NewAcc.js"
 import Upload from "./Upload.js"
 import ListSub from "./ListSub.js"
-import UploadTwo from "./UploadTwo.js"
 import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
 require("dotenv").config();
 function App() {
 	return (
 		<BrowserRouter>
-
 			<div class="w3-top">
 		    <div class="w3-bar w3-white w3-card" id="myNavbar">
 		      <a href="/" class="w3-bar-item w3-button w3-wide"><b>TexScan</b></a>
