@@ -10,8 +10,7 @@ var argon2 = require("argon2");
 var upload = multer();
 const jwt = require('jsonwebtoken')
 var router = express.Router();
-const dotenv = require("dotenv");
-dotenv.config();
+const envvars = require("../setup/exportvars.js");
 
 var UserData = require("../models/userdata");
 
@@ -20,7 +19,9 @@ router.use(express.static('public'));
 
 function generateAccessToken(username) {
 	// expires after half and hour (1800 seconds = 30 minutes)
-	return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+	console.log(envvars);
+	console.log(process.env.NODE_ENV);
+	return jwt.sign(username, envvars.TOKEN_SECRET, { expiresIn: '1800s' });
 }
 router.post("/", async (req, res) => {
 	try {

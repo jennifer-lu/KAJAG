@@ -8,8 +8,6 @@ var http = require('http');
 var fs = require('fs');
 var router = express.Router();
 var FileMeta = require("../models/filemeta");
-const dotenv = require("dotenv");
-dotenv.config();
 var authToken = require("./authToken.js");
 
 

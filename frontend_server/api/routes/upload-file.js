@@ -13,12 +13,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 var FileMeta = require("../models/filemeta");
 var authToken = require("./authToken.js");
-
+const envvars = require("../setup/exportvars.js");
 router.use(fileUpload({
 	createParentPath: true
 }));
 
 router.post("/", authToken, async (req, res) => {
+	console.log(req);
 	try {
 		if (!req.files) {
 			res.send({
@@ -26,23 +27,23 @@ router.post("/", authToken, async (req, res) => {
 				message: "No file"
 			});
 		} else {
-			console.log();
 			let sub = req.files.sub;
+			console.log(`${envvars.SUB_PATH}/${sub.name}`);
 
-			sub.mv(`${process.env.UPLOAD_ENDPOINT}/${sub.name}`);
-			
+			sub.mv(`${envvars.SUB_PATH}/${sub.name}`);
+			console.log("moved");
 			var reqData = {
 				name: sub.name,
 				email: username
 			};
 			
-			axios.post(`${process.env.FLASK_ENDPOINT}/`, reqData).then(res => {
+			/*axios.post(`${process.env.FLASK_ENDPOINT}/`, reqData).then(res => {
 				console.log("file submitted");
 			}).catch(err => {
 				res.send(err);
 				return;
 				//early return because the file (probably) doesnt exist
-			});
+			});*/
 			
 			var fileData = new FileMeta({
 				name: sub.name,

@@ -13,7 +13,6 @@ class Upload extends Component {
     this.onFileUpload = this.onFileUpload.bind(this);
     this.imgPreviewImag = createRef();
   }
-
   extractFormData = function(form) {
     const formData = new FormData(document.querySelector(form));
     let values = {};
@@ -79,12 +78,9 @@ class Upload extends Component {
 
     // Update the state
     this.setState({ selectedFile: event.target.files[0] });
-
     let fileCollection = [];
 
     const formData = this.extractFormData("#my-form");
-    console.log(formData);
-
     while (fileCollection.length) {
       fileCollection.pop();
     }
@@ -96,38 +92,36 @@ class Upload extends Component {
 
   // On file upload (click the upload button)
   onFileUpload = (file) => {
-    var headers = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-			"token": cookies.get("session")
-		}
+	var headers = {
+		'Accept': 'application/json',
+		'Content-Type': 'multipart/form-data',
+		"token": cookies.get("session")
+	};
+	console.log(file);
+	var data = new FormData();
+	const curData = this.extractFormData("#my-form");
+	console.log(curData);
+	data.append("sub", file);
+	console.log(data);
+	for(var pair of data.entries()) {
+		console.log(pair[0]+', '+pair[1]);
+	}
 
-    // Create an object of formData
-    const formData = new FormData();
-
-    // Update the formData object
-    formData.append("myFile", file);
-
-    // Details of the uploaded file
-    console.log(this.state.selectedFile);
-
-    // Request made to the backend api
-    // Send formData object
-    // axios.post("http://localhost:9001/upload-file", formData);
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-file`, {
-			file: formData
-		}, {headers : headers}).then(res => {
+	axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-file`, data, {headers : headers}).then(res => {
 			console.log(res);
 			alert("Uploaded")
 		}).catch(err => {
-			if (err.response.status === 401 || err.response.status === 403) {
-				alert("Invalid session/authentication error");
-			} else {
-				alert("Invalid file");
+			try {
+				if (err.response.status === 401 || err.response.status === 403) {
+					alert("Invalid session/authentication error");
+				}
+			} catch (err2) {
+				console.log(err2);
 			}
+			alert("Invalid file");
 			console.log(err);
 		});
-	}
+}
 
 
   // File content to be displayed after
@@ -170,7 +164,7 @@ class Upload extends Component {
                 Page Number:
                 <input type="text" name="page_number" />
               </label>
-              <input type="file" multiple onChange={this.onFileChange} />
+              <input type="file" name="sub_file" multiple onChange={this.onFileChange} />
             </form>
             <button onClick={this.onFileUpload}>
               Upload

@@ -7,12 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('api:server');
 var http = require('http');
-
+const envvars = require("../setup/exportvars.js");
 /**
  * Get port from environment and store in Express.
+ * update: JK LOL NO we need to include exportvars.js to do this
  */
-
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(envvars.PORT || '3000');
 app.set('port', port);
 
 /**
