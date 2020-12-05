@@ -1,3 +1,5 @@
 *.DS_STORE
 *.eslintcache
 key.yml
+client_secrets.json
+kajag_creds.txt

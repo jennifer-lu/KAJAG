@@ -12,10 +12,10 @@ app = Celery(
 
 
 @app.task(name="tasks.convert")
-def convert(name, email):
+def convert(name, email, page, assignment):
     path = "/uploads/" + name + ".jpg"
     for i in range(3):
-        if (transpile(path, name)):
+        if (transpile(path, name, page, assignment)):
             toPDF(name)
             send(name, email)
             return
