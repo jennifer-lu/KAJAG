@@ -36,7 +36,8 @@ export default function Login() {
 	}
 
 	return (
-		<div className="Login">
+		<div class="back">
+		<div className="Login" class="form">
 			<Form onSubmit={handleSubmit}>
 				<Form.Group size="lg" controlId="username">
 					<Form.Label>Username</Form.Label>
@@ -60,5 +61,6 @@ export default function Login() {
 				</Button>
 			</Form>
 		</div>
+			</div>
 	);
 }
