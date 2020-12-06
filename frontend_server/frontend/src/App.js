@@ -7,27 +7,28 @@ import Upload from "./Upload.js"
 import Home from "./Home.js"
 import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
 require("dotenv").config();
+
 function App() {
 	return (
 		<BrowserRouter>
 
 			<div class="top">
-		    <div class="bar white card" id="navigation">
+		    <div class="bar card" id="navigation">
 		      <a href="/" class="bar-item button wide">TexScan</a>
 		      <div class="right">
 		        <a href="/login" class="bar-item button">LOGIN</a>
-			<a href="/newacc" class="bar-item button">SIGN UP</a>
+						<a href="/newacc" class="bar-item button">SIGN UP</a>
 		        <a href="/upload" class="bar-item button">UPLOAD</a>
 		        <a href="/listsub" class="bar-item button">LIST SUB</a>
 		      </div>
 		    </div>
           <Switch>
-			<Route path="/login" component={Login} exact />
-			<Route path="/newacc" component={NewAcc} exact />
-			<Route path="/upload" component={Upload} exact />
-			<Route path="/listsub" component={ListSub} exact />
-			<Route path="/" component={Home} exact />
-			<Redirect to="/" />
+						<Route path="/login" component={Login} exact />
+						<Route path="/newacc" component={NewAcc} exact />
+						<Route path="/upload" component={Upload} exact />
+						<Route path="/listsub" component={ListSub} exact />
+						<Route path="/" component={Home} exact />
+						<Redirect to="/" />
           </Switch>
         </div>
 		</BrowserRouter>
