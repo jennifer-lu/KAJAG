@@ -19,18 +19,19 @@ router.use(express.static('public'));
 
 function generateAccessToken(username) {
 	// expires after half and hour (1800 seconds = 30 minutes)
-	console.log(envvars);
-	console.log(process.env.NODE_ENV);
 	return jwt.sign(username, envvars.TOKEN_SECRET, { expiresIn: '1800s' });
 }
 router.post("/", async (req, res) => {
+	console.log(req);
 	try {
+		console.log("trying login");
 		if (!req.body.username || !req.body.password) {
 			res.status(401).send({
 				message: "no password"
 			});
 		} else {
 			UserData.find({ username: req.body.username}).then(users => {
+				console.log("trying login");
 				if (users.length == 1) {
 					try {
 						argon2.verify(users[0].passwordhash, req.body.password).then(matches => {

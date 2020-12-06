@@ -12,6 +12,7 @@ transpiler = Blueprint("transpiler", __name__)
 
 @transpiler.route('/', methods=["POST"])
 def files():
+    print(request)
     name = request.form.get("name")
     filepath = "/var/www/uploads/" + name
     if (not os.path.exists(filepath)):

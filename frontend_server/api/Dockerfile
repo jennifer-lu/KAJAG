@@ -10,5 +10,5 @@ RUN npm i --loglevel error
 COPY . .
 
 RUN chmod 111 ./docker_start.sh
-RUN mkdir uploads tex pdf
+RUN mkdir uploads tex pdf; exit 0
 CMD ["bash", "docker_start.sh"]
