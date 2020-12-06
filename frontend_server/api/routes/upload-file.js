@@ -14,6 +14,8 @@ dotenv.config();
 var FileMeta = require("../models/filemeta");
 var authToken = require("./authToken.js");
 const envvars = require("../setup/exportvars.js");
+const path = require('path');
+
 router.use(
 	fileUpload({
 		createParentPath: true,
@@ -28,28 +30,15 @@ router.post("/", authToken, async (req, res) => {
 				message: "No file"
 			});
 		} else {
-			axios.get("flask://flask:5000/healthcheck").then(res => {
-				console.log("works flask://flask:5000/healthcheck");
-			}).catch(err => {
-				console.log("error flask://flask:5000/healthcheck");
-			});
-			axios.get("http://localhost:5000/healthcheck").then(res => {
-				console.log("works http://localhost:5000/healthcheck");
-			}).catch(err => {
-				console.log("error http://localhost:5000/healthcheck");
-			});
-			axios.get("http://flask:5000/healthcheck").then(res => {
-				console.log("works http://flask:5000/healthcheck");
-			}).catch(err => {
-				console.log("error http://flask:5000/healthcheck");
-			});
 			let sub = req.files.sub;
-			console.log(`${envvars.SUB_PATH}/${sub.name}`);
+			const name = path.parse(sub.name).name
+			console.log(`${envvars.SUB_PATH}/${name}`);
 
-			sub.mv(`${envvars.SUB_PATH}/${sub.name}`);
+			sub.mv(`${envvars.SUB_PATH}/${name}`);
+			console.log(name)
 			console.log("moved");
 			var reqData = {
-				name: sub.name,
+				name: name,
 				question: 1,
 				assignment: 1,
 				page: 1,
@@ -66,7 +55,7 @@ router.post("/", authToken, async (req, res) => {
 			});
 
 			var fileData = new FileMeta({
-				name: sub.name,
+				name: name + ".jpg",
 				author: req.username
 			});
 			fileData.save().then(item => {

@@ -12,23 +12,28 @@ transpiler = Blueprint("transpiler", __name__)
 
 @transpiler.route('/', methods=["POST"])
 def files():
-    print(request)
-    name = request.form.get("name")
+    print(request.json)
+    name = request.json.get("name")
     if (name is None):
+        print("filename")
         return "Filename Missing", 400
-    filepath = "/var/www/uploads/" + name
+    filepath = "./uploads/" + name
+    print(filepath)
+    print(os.listdir("./uploads"))
     if (not os.path.exists(filepath)):
+        print("fielpath")
         return "File DNE", 400
-    email = request.form.get("email")
+    email = request.json.get("email")
     if (email is None):
+        print("email")
         return "Missing Email", 400
     img = cv2.imread(filepath)
     if (img is None or img.size == 0):
         return "Bad File", 400
-    page = request.form.get("page")
+    page = str(request.json.get("page"))
     if (page is None):
         return "Missing Page Number", 400
-    assign = request.form.get("assignment")
+    assign = str(request.json.get("assignment"))
     if (assign is None):
         return "Missing Assignment Title", 400
     os.remove(filepath)
