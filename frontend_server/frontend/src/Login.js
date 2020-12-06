@@ -37,7 +37,7 @@ export default function Login() {
 
 	return (
 		<div class="back">
-		<div className="Login" class="form">
+		<div className="Login" class="form card">
 			<Form onSubmit={handleSubmit}>
 				<Form.Group size="lg" controlId="username">
 					<Form.Label>Username</Form.Label>

@@ -5,6 +5,7 @@ import NewAcc from "./NewAcc.js"
 import Upload from "./Upload.js"
 import ListSub from "./ListSub.js"
 import UploadTwo from "./UploadTwo.js"
+import Home from "./Home.js"
 import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
 require("dotenv").config();
 function App() {
@@ -28,6 +29,7 @@ function App() {
 						<Route path="/upload" component={Upload} exact />
 						<Route path="/uploadtwo" component={UploadTwo} exact />
 						<Route path="/listsub" component={ListSub} exact />
+						<Route path="/" component={Home} exact />
 						<Redirect to="/" />
           </Switch>
         </div>
