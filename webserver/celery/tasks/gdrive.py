@@ -45,4 +45,4 @@ def upload_gdrive(file_path, assignment_name):
 
 
 # testing
-# upload("wa01.pdf", "test002")
+# upload_gdrive("renamed_email.py", "test003")
