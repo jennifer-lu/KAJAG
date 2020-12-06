@@ -8,9 +8,15 @@ const cookies = new Cookies();
 
 export default function UploadTwo() {
 	const [sub, setSub] = useState("");
+	const [assignment, setAssignment] = useState("");
+	const [page, setPage] = useState("");
+	const [course, setCourse] = useState("");
+	const [question, setQuestion] = useState("");
 
 	function validateForm() {
-		return true;
+		console.log("a=" + assignment.length + " page = " + page + " course.length = " + course.length);
+		console.log(Number.isInteger(+page));
+		return assignment.length > 0 && Number.isInteger(+page) && course.length > 0;
 	}
 
 	function handleFile(event){
@@ -25,6 +31,10 @@ export default function UploadTwo() {
 		event.preventDefault();
 		var data = new FormData();
 		data.append("sub", sub);
+		data.append("course", course);
+		data.append("assignment", assignment);
+		data.append("page", page);
+		data.append("question", question);
 		console.log(sub);
 		axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-file`, data, {headers : headers}).then(res => {
 			console.log(res);
@@ -42,6 +52,38 @@ export default function UploadTwo() {
 			</h3>
 			<div className="UploadTwo">
 				<Form onSubmit={handleSubmit}>
+					<Form.Group size="lg" controlId="course">
+						<Form.Label>Course</Form.Label>
+						<Form.Control
+						autoFocus
+						type="text"
+						onChange={(e) => setCourse(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group size="lg" controlId="assignment">
+						<Form.Label>Assignment</Form.Label>
+						<Form.Control
+						autoFocus
+						type="text"
+						onChange={(e) => setAssignment(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group size="lg" controlId="page">
+						<Form.Label>Page</Form.Label>
+						<Form.Control
+						autoFocus
+						type="number"
+						onChange={(e) => setPage(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group size="lg" controlId="question">
+						<Form.Label>Question</Form.Label>
+						<Form.Control
+						autoFocus
+						type="number"
+						onChange={(e) => setQuestion(e.target.value)}
+						/>
+					</Form.Group>
 					<Form.Group size="lg" controlId="sub">
 						<Form.Label>File</Form.Label>
 						<Form.Control
