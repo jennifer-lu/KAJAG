@@ -11,15 +11,15 @@ function App() {
 	return (
 		<BrowserRouter>
 
-			<div class="w3-top">
-		    <div class="w3-bar w3-white w3-card" id="myNavbar">
-		      <a href="/" class="w3-bar-item w3-button w3-wide"><b>TexScan</b></a>
-		      <div class="w3-right w3-hide-small">
-		        <a href="/login" class="w3-bar-item w3-button">LOGIN</a>
-						<a href="/newacc" class="w3-bar-item w3-button">SIGN UP</a>
-		        <a href="/upload" class="w3-bar-item w3-button">UPLOAD</a>
-		        <a href="/uploadtwo" class="w3-bar-item w3-button">UPLOADTWO</a>
-		        <a href="/listsub" class="w3-bar-item w3-button">LIST SUB</a>
+			<div class="top">
+		    <div class="bar white card" id="navigation">
+		      <a href="/" class="bar-item button wide">TexScan</a>
+		      <div class="right">
+		        <a href="/login" class="bar-item button">LOGIN</a>
+						<a href="/newacc" class="bar-item button">SIGN UP</a>
+		        <a href="/upload" class="bar-item button">UPLOAD</a>
+		        <a href="/uploadtwo" class="bar-item button">UPLOADTWO</a>
+		        <a href="/listsub" class="bar-item button">LIST SUB</a>
 		      </div>
 		    </div>
           <Switch>
