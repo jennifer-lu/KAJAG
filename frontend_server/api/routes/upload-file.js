@@ -26,20 +26,20 @@ router.post("/", authToken, async (req, res) => {
 				message: "No file"
 			});
 		} else {
-			axios.get("flask://flask:80/healthcheck").then(res => {
-				console.log("works flask://flask:80/healthcheck");
+			axios.get("flask://flask:5000/healthcheck").then(res => {
+				console.log("works flask://flask:5000/healthcheck");
 			}).catch(err => {
-				console.log("error flask://flask:80/healthcheck");
+				console.log("error flask://flask:5000/healthcheck");
 			});
 			axios.get("http://localhost:5000/healthcheck").then(res => {
 				console.log("works http://localhost:5000/healthcheck");
 			}).catch(err => {
 				console.log("error http://localhost:5000/healthcheck");
 			});
-			axios.get("http://flask:80/healthcheck").then(res => {
-				console.log("works http://flask:80/healthcheck");
+			axios.get("http://flask:5000/healthcheck").then(res => {
+				console.log("works http://flask:5000/healthcheck");
 			}).catch(err => {
-				console.log("error http://flask:80/healthcheck");
+				console.log("error http://flask:5000/healthcheck");
 			});
 			let sub = req.files.sub;
 			console.log(`${envvars.SUB_PATH}/${sub.name}`);
@@ -55,7 +55,7 @@ router.post("/", authToken, async (req, res) => {
 			};
 			console.log("test2");
 			
-			axios.post(`flask://flask:80/`, reqData, { timeout: 1000 }).then(res => {
+			axios.post(`http://flask:5000/`, reqData, { timeout: 1000 }).then(res => {
 				console.log("file submitted");
 			}).catch(err => {
 				console.log("error");
