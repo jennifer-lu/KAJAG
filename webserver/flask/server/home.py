@@ -14,6 +14,8 @@ transpiler = Blueprint("transpiler", __name__)
 def files():
     print(request)
     name = request.form.get("name")
+    if (name is None):
+        return "Filename Missing", 400
     filepath = "/var/www/uploads/" + name
     if (not os.path.exists(filepath)):
         return "File DNE", 400
