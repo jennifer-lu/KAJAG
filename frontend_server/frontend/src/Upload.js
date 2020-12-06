@@ -46,11 +46,11 @@ export default function Upload() {
 	}
 
 	return (
-		<div>
-			<h3>
-				Upload your assignment here:
-			</h3>
-			<div className="UploadTwo">
+		<div class="back">
+			<div className="UploadTwo" class="form card">
+				<p>
+					Upload your assignment here:
+				</p>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group size="lg" controlId="course">
 						<Form.Label>Course</Form.Label>
