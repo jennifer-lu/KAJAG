@@ -28,14 +28,6 @@ body, html {
   color: white;
 }
 
-.frost {
-  padding-top: 24px;
-  padding-bottom: 24px;
-  align-content: center;
-  background-color: white;
-  opacity: 0.2;
-}
-
 .pad {
   padding-top: 250px;
 }
