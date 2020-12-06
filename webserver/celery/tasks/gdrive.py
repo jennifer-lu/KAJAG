@@ -1,9 +1,11 @@
-from pydrive.drive import GoogleDrive
-from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive  # noqa
+from pydrive.auth import GoogleAuth  # noqa
 
 # Pass in the file path and the assignment_name
 # This will upload the file to a folder named assignment_name
 # Will create assignment_name folder if it doesn't exist
+
+
 def upload_gdrive(file_path, assignment_name):
     gauth = GoogleAuth()
     gauth.LoadCredentialsFile("kajag_creds.txt")
@@ -27,7 +29,8 @@ def upload_gdrive(file_path, assignment_name):
             folder_found = True
     if not folder_found:
         # Upload folder
-        new_folder = drive.CreateFile({'title': assignment_name, 'mimeType': 'application/vnd.google-apps.folder'})
+        new_folder = drive.CreateFile(
+            {'title': assignment_name, 'mimeType': 'application/vnd.google-apps.folder'})
         new_folder.Upload()
 
         # Upload File

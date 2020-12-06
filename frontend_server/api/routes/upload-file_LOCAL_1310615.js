@@ -1,24 +1,22 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const _ = require("lodash");
-var http = require("http");
-var fs = require("fs");
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const _ = require('lodash');
+var http = require('http');
+var fs = require('fs');
 var router = express.Router();
 var axios = require("axios");
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 const dotenv = require("dotenv");
 dotenv.config();
 var FileMeta = require("../models/filemeta");
 var authToken = require("./authToken.js");
 const envvars = require("../setup/exportvars.js");
-router.use(
-	fileUpload({
-		createParentPath: true,
-	})
-);
+router.use(fileUpload({
+	createParentPath: true
+}));
 
 router.post("/", authToken, async (req, res) => {
 	try {
@@ -56,7 +54,7 @@ router.post("/", authToken, async (req, res) => {
 				email: req.username
 			};
 			console.log("test2");
-
+			
 			axios.post(`http://flask:5000/`, reqData, { timeout: 1000 }).then(res => {
 				console.log("file submitted");
 			}).catch(err => {
@@ -64,7 +62,7 @@ router.post("/", authToken, async (req, res) => {
 				//early return because the file (probably) doesnt exist
 				//update: jk dont lol
 			});
-
+			
 			var fileData = new FileMeta({
 				name: sub.name,
 				author: req.username
@@ -93,6 +91,6 @@ router.post("/", authToken, async (req, res) => {
 
 router.use(cors());
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({extended: true}));
 
 module.exports = router;

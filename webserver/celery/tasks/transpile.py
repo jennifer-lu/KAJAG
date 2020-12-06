@@ -29,11 +29,13 @@ def text(line):
             endtext = True
         elif (word == "\\\\"):
             if (endtext):
-                print("OUTPUT: "+output + "\\bigbreak")
-                return output + "\\bigbreak\n"
+                print("OUTPUT: " + output + "\\bigbreak")
+                output += "\\bigbreak\n"
+                return output
             else:
-                print("OUTPUT: "+output + "$ " + "\\bigbreak")
-                return output + "$ " + "\\bigbreak\n"
+                print("OUTPUT: " + output + "$ " + "\\bigbreak")
+                output += "$ " + "\\bigbreak\n"
+                return output
         else:
             if (endtext):
                 output += " $ " + word + " "
@@ -44,7 +46,7 @@ def text(line):
 
 
 def math(line):
-    return "\\[" + line[:-2] + "\\]\n"
+    return "\\[ " + line[:-2] + " \\]\n"
 
 
 def parse(tex):
@@ -54,16 +56,23 @@ def parse(tex):
         print("PARSE: " + line + "\n")
         if ("\\begin{array}" in line or "\\end{array}" in line):
             continue
+        if (not line[-2:] == "\\\\"):
+            line += " \\\\"
+            print("APPENDED LINE BREAK")
         if "\\text" in line:
             print("TEXT LINE")
             output += text(line)
         else:
             output += math(line)
-
+    print("PARSING COMPLETE")
+    print(output)
+    with open("/tex/temp.txt", "w") as file:
+        file.write(output)
     return output
 
 
 def transpile(filepath, filename, page, assignment):
+    print("PAGE: "+page)
     with open("/app/key.yml", 'r') as stream:
         try:
             key = yaml.safe_load(stream)
@@ -79,27 +88,19 @@ def transpile(filepath, filename, page, assignment):
     ansJson = json.loads(r.text)
     texResult = ""
     try:
-        texResult = ansJson["latex_styled"]
-        print(texResult)
-        texResult = parse(texResult) + "\n"
-        if (page == 1):
-            texResult = "\\textbf{" + assignment + "}\\bigbreak\n"
+        pure = ansJson["latex_styled"]
+        print(pure)
+        texResult = parse(pure) + "\n"
+        if (page == "1"):
+            print("PAGE ONE")
+            texResult = "\\textbf{" + assignment + "}\\bigbreak\n" + texResult
         print(texResult)
     except:
         try:
             texResult = ansJson["text"]
         except:
             return False
-    texHeader = """\documentclass[11pt]{article}
-    \\textwidth 15cm 
-    \\textheight 21.3cm
-    \\setlength{\\parskip}{0ex}
-
-    \\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
-    \\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools}
-
-    \\parindent=0pt
-    \\begin{document}\n"""
+    texHeader = "\documentclass[11pt]{article}\n\\textwidth 15cm\n\\textheight 21.3cm\n\\setlength{\\parskip}{0ex}\n\\usepackage[left = 0.75 in , right = 0.75 in , top = 0.75 in , bottom = 0.75 in ]{geometry}\n\\usepackage{amsfonts, amsmath, amssymb, enumerate, mathtools}\n\\parindent = 0pt\n\\begin{document}\n"
     texFooter = "\n\\end{document}\n"
     with open("/tex/" + filename + ".tex", "w") as texOut:
         texOut.writelines(
