@@ -3,7 +3,7 @@ import cv2
 from celery import Celery
 from .transpile import transpile
 from .pdf import toPDF
-from .email import send, fail
+from .renamed_email import send, fail
 app = Celery(
     "tasks",
     backend="redis://redis:6379",
