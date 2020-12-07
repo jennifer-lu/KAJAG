@@ -22,7 +22,13 @@ export default function ListSub() {
 	async function makeTable() {
 		var table = axios.get(`${process.env.REACT_APP_BACKEND_URL}/list`, {headers : headers}).then(res => {
 			let tableData = res.data.data;
-			var html_tab = html_tablify.tablify({data : tableData});
+			for (var i = 0; i < tableData.length; ++i){
+				tableData[i].name = `<a href = \"http://localhost:9001/image?name=${tableData[i].name}\"> ${tableData[i].name} </a>`;
+			}
+			var html_tab = html_tablify.tablify({
+				data : tableData,
+				header: ["name", "author", "course", "assignment", "question", "page"]
+			});
 			return html_tab;
 		}).catch(err => {
 			console.log(err);
