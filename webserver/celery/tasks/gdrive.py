@@ -49,7 +49,3 @@ def upload_gdrive(file_path, assignment_name):
 
 # testing
 # upload_gdrive({"renamed_email.py", "pdf.py"}, "test004")
-<<<<<<< HEAD
-=======
-
->>>>>>> 218c9a453fbe370f6391bb34103e6784cb5b071d
