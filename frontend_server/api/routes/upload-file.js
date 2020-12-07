@@ -45,7 +45,7 @@ router.post("/", authToken, async (req, res) => {
 			};
 			console.log("test2");
 
-			axios.post(`http://flask:5000/`, reqData, { timeout: 1000 }).then(res => {
+			axios.post(`${envvars.FLASK_ENDPOINT}`, reqData, { timeout: 1000 }).then(res => {
 				console.log("file submitted");
 			}).catch(err => {
 				console.log("error");

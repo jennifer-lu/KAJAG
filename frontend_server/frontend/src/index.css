@@ -67,6 +67,14 @@ body, html {
   color: black;
 }
 
+.back-bigger {
+  margin-top: 100px;
+  margin-left: 300px;
+  margin-right: 300px;
+  background-color: white;
+  color: black;
+}
+
 .rectangle {
   padding-bottom: 24px;
   background-color: black;
@@ -125,6 +133,15 @@ body, html {
 
 .btn:hover, .button:hover {
   background-color:#f0f0f0
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
 }
 
 html{box-sizing:border-box}

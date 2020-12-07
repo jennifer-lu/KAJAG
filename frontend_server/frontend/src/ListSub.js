@@ -18,24 +18,38 @@ export default function ListSub() {
 		'Content-Type': 'application/json',
 		"token": cookies.get("session")
 	};
-	
+
 	async function makeTable() {
 		var table = axios.get(`${process.env.REACT_APP_BACKEND_URL}/list`, {headers : headers}).then(res => {
 			let tableData = res.data.data;
-			var html_tab = html_tablify.tablify({data : tableData});
+			for (var i = 0; i < tableData.length; ++i){
+				tableData[i].name = `<a href = \"http://localhost:9001/image?name=${tableData[i].name}\"> ${tableData[i].name} </a>`;
+			}
+			var html_tab = html_tablify.tablify({
+				data : tableData,
+				header: ["name", "author", "course", "assignment", "question", "page"]
+			});
 			return html_tab;
 		}).catch(err => {
 			console.log(err);
 		});
 		return table;
 	}
-	
+
 	makeTable().then(table => {
 		setTable(table);
 		console.log(table);
 	})
-	
+
 	return (
-		<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
+
+		<div class="back-bigger">
+			<div class="form card">
+				<p class="bigger">
+					Files
+				</p>
+				<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
+			</div>
+		</div>
 	);
 }
