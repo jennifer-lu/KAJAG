@@ -13,6 +13,7 @@ var loginRouter = require("./routes/login");
 var login_pointRouter = require("./routes/login-point");
 var newaccRouter = require("./routes/newacc");
 var newacc_pointRouter = require("./routes/newacc-point");
+var imageRouter = require("./routes/image");
 
 const docker = process.env.NODE_ENV;
 
@@ -58,7 +59,7 @@ app.use("/login", loginRouter);
 app.use("/login-point", login_pointRouter);
 app.use("/newacc", newaccRouter);
 app.use("/newacc-point", newacc_pointRouter);
-
+app.use("/image", imageRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
