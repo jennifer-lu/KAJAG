@@ -32,9 +32,9 @@ export default function NewAcc() {
 			cookies.set("session", {
 				token: res.data.token
 			});
-			alert("Signed in ")
+			alert("Account successfully created")
 		}).catch(err => {
-			alert("Wrong password");
+			alert("Error");
 			console.log(err);
 		});
 	}
