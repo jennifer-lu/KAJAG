@@ -37,7 +37,7 @@ export default function ListSub() {
 
 	return (
 
-		<div class="back">
+		<div class="back-bigger">
 			<div class="form card">
 				<p class="bigger">
 					Files
