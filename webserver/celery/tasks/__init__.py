@@ -5,9 +5,10 @@ import numpy as np
 from celery import Celery
 from .transpile import transpile, headers
 from .pdf import toPDF
+from .gdrive import upload_gdrive
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from .renamed_email import send, fail
+from .renamed_email import send, fail  # noqa
 app = Celery(
     "tasks",
     backend="redis://redis:6379",
@@ -81,7 +82,7 @@ def rpi_convert(name):
     print(subtitle)
     try:
         subtitle = int(subtitle)
-    except ValueError:
+    except:
         subtitle = 1
     hash_object = hashlib.sha256(str.encode(
         title + "_" + str(subtitle)))  # move hash to celery
@@ -98,6 +99,9 @@ def rpi_convert(name):
 
     text = transpile("/uploads/" + hex_dig + ".jpg", hex_dig, subtitle, title)
     if (text):
-        print("SUCCESFUL")
+        print("SUCCESSFUL")
     toPDF(hex_dig)
     send(hex_dig, "se101kajag@gmail.com")
+    upload_gdrive("/uploads/" + hex_dig + ".jpg", title)
+    upload_gdrive("/tex/" + hex_dig + ".tex", title)
+    upload_gdrive("/pdf/" + hex_dig + ".pdf", title)
