@@ -18,7 +18,7 @@ export default function ListSub() {
 		'Content-Type': 'application/json',
 		"token": cookies.get("session")
 	};
-	
+
 	async function makeTable() {
 		var table = axios.get(`${process.env.REACT_APP_BACKEND_URL}/list`, {headers : headers}).then(res => {
 			let tableData = res.data.data;
@@ -29,13 +29,14 @@ export default function ListSub() {
 		});
 		return table;
 	}
-	
+
 	makeTable().then(table => {
 		setTable(table);
 		console.log(table);
 	})
-	
+
 	return (
-		<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
+		<p class="bigger">Files</p>
+		<div className="content card form back" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
 	);
 }
