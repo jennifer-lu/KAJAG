@@ -42,6 +42,9 @@ export default function NewAcc() {
 	return (
 		<div class="back">
 		<div className="Login" class="form card">
+		<p class="bigger">
+			Make an Account
+		</p>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group size="lg" controlId="username">
 					<Form.Label>Username</Form.Label>
@@ -69,7 +72,7 @@ export default function NewAcc() {
 					/>
 				</Form.Group>
 				<Button block size="lg" type="submit" disabled={!validateForm()}>
-					Make Account
+					Sign Up&nbsp;&nbsp;➤
 				</Button>
 			</Form>
 		</div>

@@ -5,8 +5,7 @@ import cv2
 from datetime import datetime
 from flask import request, Blueprint
 sys.path.insert(1, os.path.abspath("../"))  # noqa
-from tasks import convert  # noqa
-print(convert.name)
+from tasks import convert, rpi_convert   # noqa
 transpiler = Blueprint("transpiler", __name__)
 
 
@@ -46,18 +45,17 @@ def files():
 @transpiler.route('/rpi', methods=["POST"])
 def rpi():
     time = str(datetime.now()).replace(" ", "_")
-
     hash_object = hashlib.sha256(str.encode(time))  # move hash to celery
     hex_dig = hash_object.hexdigest()
     print(hex_dig)
     filepath = "/var/www/uploads/" + hex_dig
     img = request.files['image']
-
     if (img is None):
         return 400, "Image missing."
     else:
         img.save(filepath)
-    return hex_dig
+    rpi_convert.delay(hex_dig)
+    return time
 # @transpiler.route('/', methods=["POST"])
 # def transpile():
     # time = str(datetime.now()).replace(" ", "_")

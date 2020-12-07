@@ -37,30 +37,33 @@ export default function Login() {
 
 	return (
 		<div class="back">
-		<div className="Login" class="form card">
-			<Form onSubmit={handleSubmit}>
-				<Form.Group size="lg" controlId="username">
-					<Form.Label>Username</Form.Label>
-					<Form.Control
-					autoFocus
-					type="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					/>
-				</Form.Group>
-				<Form.Group size="lg" controlId="password">
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					/>
-				</Form.Group>
-				<Button block size="lg" type="submit" disabled={!validateForm()}>
-					Login
-				</Button>
-			</Form>
-		</div>
+			<div className="Login" class="form card">
+				<p class="bigger">
+					Login to TexScan
+				</p>
+				<Form onSubmit={handleSubmit}>
+					<Form.Group size="lg" controlId="username">
+						<Form.Label>Username</Form.Label>
+						<Form.Control
+						autoFocus
+						type="username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group size="lg" controlId="password">
+						<Form.Label>Password</Form.Label>
+						<Form.Control
+						type="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						/>
+					</Form.Group>
+					<Button block size="lg" type="submit" disabled={!validateForm()}>
+						Login&nbsp;&nbsp;➤
+					</Button>
+				</Form>
 			</div>
+		</div>
 	);
 }
