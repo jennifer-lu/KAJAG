@@ -7,46 +7,45 @@ from pydrive.auth import GoogleAuth  # noqa
 
 
 def upload_gdrive(file_path, assignment_name):
-    try:
-        gauth = GoogleAuth()
-        gauth.LoadCredentialsFile("/app/tasks/kajag_creds.txt")
+    gauth = GoogleAuth()
+    gauth.LoadCredentialsFile("/app/tasks/kajag_creds.txt")
 
-        if gauth.access_token_expired:
-            gauth.Refresh()
-        else:
-            gauth.Authorize()
+    if gauth.access_token_expired:
+        gauth.Refresh()
+    else:
+        gauth.Authorize()
 
-        drive = GoogleDrive(gauth)
+    drive = GoogleDrive(gauth)
 
-        # list of folders
-        folders = drive.ListFile({'q': "title='" + assignment_name + "' and mimeType='application/vnd.google-apps.folder' "
-                                  "and trashed=false"}).GetList()
-        folder_found = False
+    # list of folders
+    folders = drive.ListFile({'q': "title='" + assignment_name + "' and mimeType='application/vnd.google-apps.folder' "
+                              "and trashed=false"}).GetList()
+    folder_found = False
+    for folder in folders:
+        if folder['title'] == assignment_name:
+            for file in file_path:
+                file1 = drive.CreateFile({'parents': [{'id': folder['id']}]})
+                file1.SetContentFile(file)
+                file1.Upload()
+            folder_found = True
+    if not folder_found:
+        # Upload folder
+        new_folder = drive.CreateFile(
+            {'title': assignment_name, 'mimeType': 'application/vnd.google-apps.folder'})
+        new_folder.Upload()
+
+        # Upload File
+        folders = drive.ListFile(
+            {'q': "title='" + assignment_name + "' and mimeType='application/vnd.google-apps.folder' "
+                                                "and trashed=false"}).GetList()
         for folder in folders:
             if folder['title'] == assignment_name:
-                file1 = drive.CreateFile({'parents': [{'id': folder['id']}]})
-                file1.SetContentFile(file_path)
-                file1.Upload()
-                folder_found = True
-        if not folder_found:
-            # Upload folder
-            new_folder = drive.CreateFile(
-                {'title': assignment_name, 'mimeType': 'application/vnd.google-apps.folder'})
-            new_folder.Upload()
-
-            # Upload File
-            folders = drive.ListFile(
-                {'q': "title='" + assignment_name + "' and mimeType='application/vnd.google-apps.folder' "
-                                                    "and trashed=false"}).GetList()
-            for folder in folders:
-                if folder['title'] == assignment_name:
-                    file1 = drive.CreateFile(
-                        {'parents': [{'id': folder['id']}]})
-                    file1.SetContentFile(file_path)
+                for file in file_path:
+                    file1 = drive.CreateFile({'parents': [{'id': folder['id']}]})
+                    file1.SetContentFile(file)
                     file1.Upload()
-    except:
-        print("totally production ready code here")
 
 
 # testing
-# upload_gdrive("renamed_email.py", "test003")
+upload_gdrive({"renamed_email.py", "pdf.py"}, "test004")
+
