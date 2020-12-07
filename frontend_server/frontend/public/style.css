@@ -1,23 +1,7 @@
-body, h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif
-}
-
-body, html {
-  height: 100%;
-  line-height: 1.8
-}
-
 .image {
   background-position: center;
   background-size: cover;
   background-image: url("math-30.png");
-  min-height: 100%;
-}
-
-.container {
-  position: relative;
-  text-align: center;
-  color: white;
   min-height: 100%;
 }
 
@@ -26,38 +10,9 @@ body, html {
   padding-bottom: 24px;
   background-color: black;
   color: white;
-}
-
-.pad {
-  padding-top: 250px;
-}
-
-.heading {
-  font-size: 350px;
-  font-weight: bold;
-  line-height: 1;
-  opacity: 0.7;
-  color: black;
-}
-
-.tailing {
-  font-size: 50px;
-  opacity: 0.7;
-  color: black;
-}
-
-.center {
   align-content: center;
 }
 
-.fade {
-  animation: fadeIn ease 10s;
-  -webkit-animation: fadeIn ease 10s;
-  -moz-animation: fadeIn ease 10s;
-  -o-animation: fadeIn ease 10s;
-  -ms-animation: fadeIn ease 10s;
-}
-@keyframes fadeIn {
-  0% {opacity:0;}
-  70% {opacity:0.7;}
+.pad {
+  padding-top: 300px;
 }

@@ -5,9 +5,9 @@ import numpy as np
 from celery import Celery
 from .transpile import transpile, headers
 from .pdf import toPDF
-from .email import send, fail
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from .renamed_email import send, fail
 app = Celery(
     "tasks",
     backend="redis://redis:6379",

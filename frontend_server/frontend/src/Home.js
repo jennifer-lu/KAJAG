@@ -9,7 +9,7 @@ const cookies = new Cookies();
 export default class Home extends React.Component {
   render() {
     return <header class="wot">
-      <div class="center pad">
+      <div class="pad">
         <span class="heading fade">TexScan</span>
         <br></br>
         <span class="tailing fade">Digitization simplified.</span>

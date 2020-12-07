@@ -33,15 +33,14 @@ router.post("/", authToken, async (req, res) => {
 			let sub = req.files.sub;
 			const name = path.parse(sub.name).name
 			console.log(`${envvars.SUB_PATH}/${name}`);
-
+			console.log(req.body);
 			sub.mv(`${envvars.SUB_PATH}/${name}`);
 			console.log(name)
-			console.log("moved");
 			var reqData = {
 				name: name,
-				question: 1,
-				assignment: 1,
-				page: 1,
+				question: req.body.question,
+				assignment: req.body.assignment,
+				page: req.body.page,
 				email: req.username
 			};
 			console.log("test2");
@@ -56,17 +55,26 @@ router.post("/", authToken, async (req, res) => {
 
 			var fileData = new FileMeta({
 				name: name + ".jpg",
-				author: req.username
+				author: req.username,
+				page: req.body.page,
+				question: req.body.question,
+				assignment: req.body.assignment,
+				course: req.body.course
 			});
+			console.log(fileData);
 			fileData.save().then(item => {
 				res.send({
 					status: true,
 					message: "File uploaded, database updated",
 					data: {
-						name: sub.name,
+						name: name + ".jpg",
 						mimetype: sub.mimetype,
 						size: sub.size,
-						username: req.username
+						username: req.username,
+						page: req.body.page,
+						question: req.body.question,
+						assignment: req.body.assignment,
+						course: req.body.course
 					}
 				});
 			}).catch(err => {
