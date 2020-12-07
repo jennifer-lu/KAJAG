@@ -29,7 +29,7 @@ export default function Login() {
 		}, {headers : headers}).then(res => {
 			console.log(res);
 			cookies.set("session", res.data.token);
-			alert("Signed in ")
+			alert("Signed in")
 		}).catch(err => {
 			alert("Wrong password");
 			console.log(err);
