@@ -1,6 +1,7 @@
 import os
 import cv2
 import hashlib
+import json
 import numpy as np
 from celery import Celery
 from .transpile import transpile, headers
@@ -25,7 +26,7 @@ else:
     print(f"CONNECTION TO {uri} SUCCESSFUL")
 
 db = client["testup_db"]
-fm = db["FileMeta"]
+fm = db["filemetas"]
 
 
 @app.task(name="tasks.convert")
@@ -93,14 +94,16 @@ def rpi_convert(name):
     cv2.imwrite("/uploads/" + hex_dig + ".jpg", content)
 
     file = {"name": hex_dig + ".jpg", "assignment": title, "course": "NA",
-            "question": subtitle, "page": "N/A", "author": "se101kajag@gmail.com"}
-    fm.insert_one(file)
-
+            "question": subtitle, "page": 0, "author": "se101kajag@gmail.com"}
+    x = fm.insert_one(file)
+    print(x.inserted_id)
+    cursor = fm.find({})
+    for document in cursor:
+        print(document)
     text = transpile("/uploads/" + hex_dig + ".jpg", hex_dig, subtitle, title)
     if (text):
         print("SUCCESSFUL")
     toPDF(hex_dig)
     send(hex_dig, "se101kajag@gmail.com")
-    upload_gdrive("/uploads/" + hex_dig + ".jpg", title)
-    upload_gdrive("/tex/" + hex_dig + ".tex", title)
-    upload_gdrive("/pdf/" + hex_dig + ".pdf", title)
+    upload_gdrive(["/uploads/" + hex_dig + ".jpg", "/tex/" +
+                   hex_dig + ".tex", "/pdf/" + hex_dig + ".pdf"],  title)
