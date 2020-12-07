@@ -5,7 +5,6 @@ import numpy as np
 from celery import Celery
 from .transpile import transpile, headers
 from .pdf import toPDF
-from .gdrive import upload_gdrive
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from .renamed_email import send, fail  # noqa
