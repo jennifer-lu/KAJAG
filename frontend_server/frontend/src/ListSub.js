@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios"
 import Cookies from 'universal-cookie';
-
 import DOMPurify from 'dompurify';
+import pathParse from "path-parse";
 var html_tablify = require('html-tablify');
 
 const cookies = new Cookies();
@@ -23,11 +23,14 @@ export default function ListSub() {
 		var table = axios.get(`${process.env.REACT_APP_BACKEND_URL}/list`, {headers : headers}).then(res => {
 			let tableData = res.data.data;
 			for (var i = 0; i < tableData.length; ++i){
-				tableData[i].name = `<a href = \"http://localhost:9001/image?name=${tableData[i].name}\"> ${tableData[i].name} </a>`;
+				const basename = pathParse(tableData[i].name).name;
+				tableData[i].name = `<a href = \"http://localhost:9001/files/image?name=${basename + ".jpg"}\"> ${basename} </a>`;
+				tableData[i].tex = `<a href = \"http://localhost:9001/files/tex?name=${basename + ".tex"}\"> ${basename} </a>`;
+				tableData[i].pdf = `<a href = \"http://localhost:9001/files/pdf?name=${basename + ".pdf"}\"> ${basename} </a>`;
 			}
 			var html_tab = html_tablify.tablify({
 				data : tableData,
-				header: ["name", "author", "course", "assignment", "question", "page"]
+				header: ["name", "tex", "pdf", "author", "course", "assignment", "question", "page"]
 			});
 			return html_tab;
 		}).catch(err => {

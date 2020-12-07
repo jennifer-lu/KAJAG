@@ -39,9 +39,9 @@ export default function Upload() {
 		console.log(sub);
 		axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload-file`, data, {headers : headers}).then(res => {
 			console.log(res);
-			alert("Signed in ")
+			alert("Successfully submitted!")
 		}).catch(err => {
-			alert("Wrong password");
+			alert("Error");
 			console.log(err);
 		});
 	}

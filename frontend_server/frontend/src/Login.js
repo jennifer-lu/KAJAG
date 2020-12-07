@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios"
 import Cookies from 'universal-cookie';
+import path from "path";
 const cookies = new Cookies();
 //import "./Login.css";
 
@@ -28,7 +29,7 @@ export default function Login() {
 		}, {headers : headers}).then(res => {
 			console.log(res);
 			cookies.set("session", res.data.token);
-			alert("Signed in ")
+			alert("Signed in")
 		}).catch(err => {
 			alert("Wrong password");
 			console.log(err);
