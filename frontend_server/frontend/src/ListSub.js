@@ -36,7 +36,14 @@ export default function ListSub() {
 	})
 
 	return (
-		<p class="bigger">Files</p>
-		<div className="content card form back" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
+
+		<div class="back">
+			<div class="form card">
+				<p class="bigger">
+					Files
+				</p>
+				<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(table)}}></div>
+			</div>
+		</div>
 	);
 }
