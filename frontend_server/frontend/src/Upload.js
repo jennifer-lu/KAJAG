@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Container, Col, Row } from "react-bootstrap";
 import axios from "axios"
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -47,10 +48,10 @@ export default function Upload() {
 
 	return (
 		<div class="back">
-			<div className="UploadTwo" class="form card">
-				<p>
-					Upload your assignment here:
-				</p>
+			<div className="Upload" class="form card">
+			<p class="bigger">
+				Upload Your Assignment
+			</p>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group size="lg" controlId="course">
 						<Form.Label>Course</Form.Label>
@@ -93,7 +94,7 @@ export default function Upload() {
 						/>
 					</Form.Group>
 					<Button block size="lg" type="submit" disabled={!validateForm()}>
-						UploadTwo
+						Upload&nbsp;&nbsp;➤
 					</Button>
 				</Form>
 			</div>
