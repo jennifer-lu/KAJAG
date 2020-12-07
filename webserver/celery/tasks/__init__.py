@@ -9,6 +9,7 @@ from .pdf import toPDF
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from .renamed_email import send, fail  # noqa
+from .gdrive import upload_gdrive
 app = Celery(
     "tasks",
     backend="redis://redis:6379",
