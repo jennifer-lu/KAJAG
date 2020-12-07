@@ -71,7 +71,28 @@ def parse(tex):
     return output
 
 
+def headers(filename):
+    with open("/app/key.yml", 'r') as stream:
+        try:
+            key = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+            return
+    image_uri = "data:image/png;base64," + \
+        base64.b64encode(open("/uploads/" + filename +
+                              ".jpg", "rb").read()).decode()
+    r = requests.post("https://api.mathpix.com/v3/text",
+                      data=json.dumps({'src': image_uri}),
+                      headers={"app_id": "alice_liu_uwaterloo_ca_be1dfb_0ce227", "app_key": key["key"],
+                               "Content-type": "application/json"})
+    ansJson = json.loads(r.text)
+    # texResult = ""
+    print(ansJson)
+    return ansJson
+
+
 def transpile(filepath, filename, page, assignment):
+    page = str(page)
     print("PAGE: "+page)
     with open("/app/key.yml", 'r') as stream:
         try:
@@ -104,7 +125,7 @@ def transpile(filepath, filename, page, assignment):
     texFooter = "\n\\end{document}\n"
     with open("/tex/" + filename + ".tex", "w") as texOut:
         texOut.writelines(
-            [texHeader, "\\setcounter{page}" + "{"+page+"}", texResult, texFooter])
+            [texHeader, "\\setcounter{page}" + "{" + page + "}", texResult, texFooter])
     return True
 
 
