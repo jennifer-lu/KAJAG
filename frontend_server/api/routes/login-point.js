@@ -18,8 +18,8 @@ router.use(upload.array());
 router.use(express.static('public'));
 
 function generateAccessToken(username) {
-	// expires after half and hour (1800 seconds = 30 minutes)
-	return jwt.sign(username, envvars.TOKEN_SECRET, { expiresIn: '1800s' });
+	// expires after one day (86400 seconds = 1day)
+	return jwt.sign(username, envvars.TOKEN_SECRET, { expiresIn: '86400s' });
 }
 router.post("/", async (req, res) => {
 	console.log(req);
