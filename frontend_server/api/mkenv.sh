@@ -4,7 +4,7 @@ echo "PORT=9001" >> .env.production
 echo "UPLOAD_ENDPOINT=/app/uploads" >> .env.production
 echo "TEX_ENDPOINT=/app/tex" >> .env.production
 echo "PDF_ENDPOINT=/app/pdf" >> .env.production
-echo "FLASK_ENDPOINT=flask://flask:80" >> .env.production
+echo "FLASK_ENDPOINT=http://flask:5000" >> .env.production
 
 printf "TOKEN_SECRET=" > .env.development
 xxd -l 64 -p -c 9000 /dev/urandom >> .env.development

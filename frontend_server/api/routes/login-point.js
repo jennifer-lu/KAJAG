@@ -22,7 +22,6 @@ function generateAccessToken(username) {
 	return jwt.sign(username, envvars.TOKEN_SECRET, { expiresIn: '86400s' });
 }
 router.post("/", async (req, res) => {
-	console.log(req);
 	try {
 		console.log("trying login");
 		if (!req.body.username || !req.body.password) {

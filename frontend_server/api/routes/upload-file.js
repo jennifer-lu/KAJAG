@@ -40,7 +40,7 @@ router.post("/", authToken, async (req, res) => {
 				page: req.body.page,
 				email: req.username
 			};
-			console.log("test2");
+			console.log(`${envvars.FLASK_ENDPOINT}`);
 
 			axios.post(`${envvars.FLASK_ENDPOINT}`, reqData, { timeout: 1000 }).then(res => {
 				console.log("file submitted");
