@@ -19,7 +19,7 @@ function App() {
 		        <a href="/login" class="bar-item button">LOGIN</a>
 						<a href="/newacc" class="bar-item button">SIGN UP</a>
 		        <a href="/upload" class="bar-item button">UPLOAD</a>
-		        <a href="/listsub" class="bar-item button">LIST SUB</a>
+		        <a href="/listsub" class="bar-item button">VIEW SUBMISSIONS</a>
 		      </div>
 		    </div>
           <Switch>

@@ -41,11 +41,11 @@ def upload_gdrive(file_path, assignment_name):
         for folder in folders:
             if folder['title'] == assignment_name:
                 for file in file_path:
-                    file1 = drive.CreateFile({'parents': [{'id': folder['id']}]})
+                    file1 = drive.CreateFile(
+                        {'parents': [{'id': folder['id']}]})
                     file1.SetContentFile(file)
                     file1.Upload()
 
 
 # testing
-upload_gdrive({"renamed_email.py", "pdf.py"}, "test004")
-
+# upload_gdrive({"renamed_email.py", "pdf.py"}, "test004")
