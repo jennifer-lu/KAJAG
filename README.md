@@ -1,5 +1,9 @@
 # KAJAG
 
+## Demo
+
+![texscan-demo](https://github.com/jennifer-lu/kajag/blob/main/demo.gif)
+
 ## Instructions
 
 ### Docker
